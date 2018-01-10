@@ -870,7 +870,7 @@ export class RulesMapComponent {
     // set all texts to the vertical center of the current scale
     d3.select('g.questionZoom').attr('transform',
       this.stringifyTransform(_eventTransform, true));
-    selectAll('text.questionTitle, text.questionTitle tspan').attr('y',
+    d3.selectAll('text.questionTitle, text.questionTitle tspan').attr('y',
       questionSvgHeight / (_eventTransform['k'] * 2));
 
   }
