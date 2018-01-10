@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="2px" viewBox="0 0 12 2" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons / 16px / Less</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="2" y="7" width="12" height="2" rx="1"></rect>
+    </defs>
+    <g id="Design-Sprint-6" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Map-View-1.1" transform="translate(-1396.000000, -166.000000)">
+            <g id="View-Options" transform="translate(1326.000000, 151.000000)">
+                <g id="Icons-/-16px-/-Less" transform="translate(68.000000, 8.000000)">
+                    <path d="M2,14 L14,14 L14,2 L2,2 L2,14 Z M0,16 L16,16 L16,0 L0,0 L0,16 Z" id="Icon-Container" fill-opacity="0" fill="#FF5D2A"></path>
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Icon" fill="#3C4959" xlink:href="#path-1"></use>
+                    <g id="Fill-/-Dark-Grey" mask="url(#mask-2)" fill="#ACB1C0">
+                        <rect id="Rectangle" x="0" y="0" width="16" height="16"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

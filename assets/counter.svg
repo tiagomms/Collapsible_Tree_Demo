@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Counter</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Design-Sprint-6" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Map-View-1.1" transform="translate(-611.000000, -678.000000)">
+            <g id="Map" transform="translate(24.000000, 172.000000)">
+                <g id="Circles" transform="translate(0.000000, 8.000000)">
+                    <g id="Counter" transform="translate(587.000000, 498.000000)">
+                        <rect id="Background-Color" fill="#FFFFFF" x="0" y="0" width="16" height="16"></rect>
+                        <path d="M6.98630137,3 L8.02739726,3 L12,13 L10.6849315,13 L9.53424658,10.0704225 L5.45205479,10.0704225 L4.31506849,13 L3,13 L6.98630137,3 Z M9.26027397,9.08450704 L7.50684932,4.46478873 L5.69863014,9.08450704 L9.26027397,9.08450704 Z" id="A" fill="#2B3446"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

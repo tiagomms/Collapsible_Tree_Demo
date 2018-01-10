@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon-Blue</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M6.5,5.77777778 L6.5,9.11111111 C6.5,9.98952771 7.15942506,10.7222222 8,10.7222222 C8.84057494,10.7222222 9.5,9.98952771 9.5,9.11111111 L9.5,5.22222222 C9.5,3.72991674 8.39307494,2.5 7,2.5 C5.60692506,2.5 4.5,3.72991674 4.5,5.22222222 L4.5,9.66666667 C4.5,11.7723055 6.05492506,13.5 8,13.5 C9.9454165,13.5 11.5,11.7724861 11.5,9.66666667 L11.5,5.77777778 C11.5,5.5016354 11.2761424,5.27777778 11,5.27777778 C10.7238576,5.27777778 10.5,5.5016354 10.5,5.77777778 L10.5,9.66666667 C10.5,11.2423421 9.36823816,12.5 8,12.5 C6.63207494,12.5 5.5,11.242139 5.5,9.66666667 L5.5,5.22222222 C5.5,4.26008326 6.18407494,3.5 7,3.5 C7.81592506,3.5 8.5,4.26008326 8.5,5.22222222 L8.5,9.11111111 C8.5,9.45936118 8.26342506,9.72222222 8,9.72222222 C7.73657494,9.72222222 7.5,9.45936118 7.5,9.11111111 L7.5,5.77777778 C7.5,5.5016354 7.27614237,5.27777778 7,5.27777778 C6.72385763,5.27777778 6.5,5.5016354 6.5,5.77777778 Z" id="path-1"></path>
+    </defs>
+    <g id="Design-Sprint-6" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Map-View-1.1" transform="translate(-332.000000, -345.000000)">
+            <g id="Map" transform="translate(24.000000, 172.000000)">
+                <g id="Icon-Blue" transform="translate(308.000000, 173.000000)">
+                    <path d="M16,8 C16,12.418 12.418,16 8,16 C3.582,16 0,12.418 0,8 C0,3.582 3.582,0 8,0 C12.418,0 16,3.582 16,8 Z" id="Background" fill="#48A3DA"></path>
+                    <g id="Icons-/-16px-/-Attachment">
+                        <path d="M2,14 L14,14 L14,2 L2,2 L2,14 Z M0,16 L16,16 L16,0 L0,0 L0,16 Z" id="Icon-Container" fill-opacity="0" fill="#D3D3D3"></path>
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Mask" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

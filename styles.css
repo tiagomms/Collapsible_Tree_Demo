@@ -1,0 +1,146 @@
+/* variables */
+/*
+	$background-mapView-color: #2B3446;
+	$background-mapView-Active-color: #ACB1C0;
+	$branchRect-mapView-Active-color: #454E5D;
+	$node-Blue: #48A3DA;
+	$borders-Blue: #37AFDA;
+	$mainText-mapView-color: #FFFFFF;
+	$secondaryText-mapView-color: #8E93A4;
+	$rules-map-verticalLine-color: #495163;
+	$background-questionNames-color: #3C4959;
+	$grey-bg: #F7F8F9;
+	$disable-gray: #B7BBBD;
+*/
+
+/* classes */
+#mapView {
+	position: relative;
+	display: block;
+	text-align: center;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+
+.questionMapSvg {
+	position: relative;
+	background-color: #3C4959;
+}
+
+.fixSafariBug {
+	position: relative;
+	display: block;
+	width: 100%;
+	margin-top: -6px;
+	height: calc(100% - 50px);
+}
+
+.ruleMapSvg {
+	background-color: #2B3446;
+	cursor: move;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.questionSvgContextMenu {
+	cursor: auto;
+	position: absolute;
+	background-color: white;
+	width: 150px;
+	padding: 8px;
+	left: 0;
+	top: 0;
+	border: 1px #ccc solid;
+	border-radius: 6px;
+	box-shadow: #333 2px 2px 4px;
+}
+
+.questionSvgContextMenu ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	text-align: left;
+}
+
+.menuOptions {
+	cursor: pointer;
+}
+
+.questionSeparator {
+	fill-opacity: 0;
+	stroke: white;
+}
+
+.mapViewActive {
+	fill: #ACB1C0 !important;
+	fill-opacity: 0.2 !important;
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+.node circle {
+	fill: #FFFFFF;
+}
+
+.node rect.branchRect {
+	fill: #2B3446;
+	stroke: none;
+}
+
+.node rect.branchRect.branchActive {
+	fill: #454E5D;
+}
+
+.node.disabled circle {
+	fill: #8E93A4;
+}
+
+.node.active circle {
+	fill: #48A3DA;
+}
+
+line {
+	fill: none;
+	stroke-width: 1px;
+	stroke: #fff;
+}
+
+line.questionSeparator {
+	stroke: #FFFFFF;
+}
+
+line.mapSeparator {
+	stroke: #8E93A4;
+}
+
+.link {
+	fill: none;
+	stroke: #48A3DA;
+	stroke-width: 1.5px;
+}
+
+text, tspan {
+	font: 10px sans-serif;
+	fill: #FFFFFF;
+}
+
+text.secondary, tspan.secondary {
+	fill: #8E93A4;
+}
+
+.zoomRectBtn rect {
+	fill: #F7F8F9;
+	stroke: #B7BBBD;
+}
+
+.zoomRectBtn:hover rect {
+	fill: #dadfe3;
+}
+
+.zoomRectBtn:active rect {
+	fill: #cbd2d8;
+}
