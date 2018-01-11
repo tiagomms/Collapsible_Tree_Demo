@@ -3,9 +3,9 @@ var dataset = "small_dataset";
 
 var prefix = '$userRuleDocument$';
 var documentID;
+var decisionTreeLocal;
 
 var currentNode = { id: undefined, depth: undefined };
-var previousNode = { id: undefined, depth: undefined };
 
 var treeHeight = 0;
 var treeWidth = 0;
@@ -72,7 +72,7 @@ var resetMapView = function() {
  */
 var drawMapView = function() {
 
-  const jsonTreeData = decisionTreeLocal.document.decisionTree;
+  const jsonTreeData = decisionTreeLocal;
 
   // currentStorage represents throughout the document the collapsed nodes
   // for this chart
@@ -88,7 +88,7 @@ var drawMapView = function() {
       // transfering data from the connections Node to a newNode for d3
       // handling, plus adding branch name and options from the connection
 
-      let isNodeIdInStorage = false,
+      var isNodeIdInStorage = false,
           __hasParentBranchRationales = false,
           __hasParentBranchActions = false;
 
@@ -298,8 +298,8 @@ var drawMapView = function() {
 
   // if map has not been fully drawn before
   // switch Selected Node
-  if (!isMapFullyDrawn && previousNode['id']) {
-    switchSelectedNode(previousNode);
+  if (!isMapFullyDrawn && currentNode['id']) {
+    switchSelectedNode(currentNode);
   }
   isMapFullyDrawn = true;
 
@@ -340,13 +340,13 @@ var updateMapView = function(source, hasTransition) {
   const links = treeData.descendants().slice(1);
 
   // normalize for fixed-depth & find currentNode depth (if necessary)
-  if (previousNode['depth']) {
+  if (currentNode['depth']) {
     nodes.forEach((d, i) => { d.y = d.depth * fixedWidth; })
   } else {
     nodes.forEach((d, i) => {
       d.y = d.depth * fixedWidth;
-      if (d.data.id === previousNode['id']) {
-        previousNode['depth'] = d.depth;
+      if (d.data.id === currentNode['id']) {
+        currentNode['depth'] = d.depth;
       }
     })
   }
@@ -770,7 +770,7 @@ var getDepthWidth = function() {
         includeCollapsedNodes = includeCollapsedNodesForTreeHeight;
 
   const childCount = (level, n) => {
-    let nodeChildren;
+    var nodeChildren;
     if (includeCollapsedNodes) {
       nodeChildren = (n.children || n._children || undefined);
     } else {
@@ -848,6 +848,7 @@ var handleNodeMouseleave = function(d, i) {
 var triggerCollapse = function(d) {
   // getting collapsedNodes from LocalStorage
   const collapsedNodes = loadStorage('collapsedNodes');
+  console.log(collapsedNodes);
 
   // toggle node state
   if (d.data.state === undefined || d.data.state === 'closed') {
@@ -865,8 +866,8 @@ var triggerCollapse = function(d) {
 
   // check if the node selected was collapsed and
   // restores everything back to normal
-  if (previousNode['id']) {
-    switchSelectedNode(previousNode);
+  if (currentNode['id']) {
+    switchSelectedNode(currentNode);
   }
 }
 
@@ -954,8 +955,10 @@ var switchSelectedNode = function(d) {
     .attr('xlink:href', getIcon('counter-blue'));
 
   // update Previous Node
-  previousNode['id'] = d.id;
-  previousNode['depth'] = d.depth;
+  currentNode['id'] = d.id;
+  currentNode['depth'] = d.depth;
+
+  persistStorage('selectedNode', currentNode);
 }
 
 /*
@@ -972,7 +975,7 @@ var wrapText = function (texts, width, isQuestionTitle) {
           y = __thisText.attr('y'),
           dy = parseFloat(__thisText.attr('dy'));
 
-    let   word,
+    var   word,
           tspanLength,
           lineNumber = 0,
           line = [],
@@ -1016,10 +1019,10 @@ var routeToNode = function(d) {
    * on the actual job, the page would change to perform changes on the node
    */
   /*
-  const newRoute = '../' + d.data.id + '/' +
-    (d.data.question ? 'options' : 'actions');
+    const newRoute = '../' + d.data.id + '/' +
+      (d.data.question ? 'options' : 'actions');
 
-  router.navigate([ newRoute ], { relativeTo: route });
+    router.navigate([ newRoute ], { relativeTo: route });
   */
   switchSelectedNode(d);
 }
@@ -1189,24 +1192,24 @@ var triggerAddRationale = function(d) {
 var createMapViewLocalStorage = function() {
 
   // THE LINE BELOW TO RESET STORAGE
-  // localStorage.set( `${prefix}`, {});
-  if (loadStorage(prop)) { return; }
+  // localStorage.removeItem( `${prefix}` );
+  if (loadStorage('collapsedNodes')) { return; }
 
-  const initialStorage = (JSON.parse(localStorage.getItem(`${prefix}`)) || undefined),
+  const initialStorage = JSON.parse(localStorage.getItem(`${prefix}`) || {}),
         props = ['selectedNode', 'collapsedNodes', 'parentBranchActions', 'parentBranchRationales'];
-  let   resultStorage;
+  var   currentStorage = Object.assign ( {}, initialStorage);
+  
+  console.log(initialStorage);
+  currentStorage[documentID] = Object.create({});
 
-  if (initialStorage) {
-    resultStorage = Object.assign ( {}, initialStorage);
-  } else {
-    resultStorage = Object.create ( {} );
-  }
-  resultStorage[documentID] = Object.create({});
-
-  for(var prop in props) {
-    resultStorage[documentID][prop] = [];
-  }
-  localStorage.setItem( `${prefix}`, JSON.stringify(resultStorage));
+  props.forEach((prop) => {
+    if (prop !== 'selectedNode') {
+      currentStorage[documentID][prop] = [];
+    } else {
+      currentStorage[documentID][prop] = {id: '0', depth: 0}; 
+    }
+  });
+  localStorage.setItem( `${prefix}`, JSON.stringify(currentStorage));
 }
 
 
@@ -1216,7 +1219,8 @@ var createMapViewLocalStorage = function() {
  * documentID
  **/
 var loadStorage = function(prop) {
-  const currentStorage = (JSON.parse(localStorage.getItem(`${prefix}`)) || undefined);
+  const currentStorage = JSON.parse(localStorage.getItem(`${prefix}`) || {});
+  console.log(currentStorage);
 
   if (!currentStorage || !currentStorage[documentID]) {
     return undefined;
@@ -1228,409 +1232,39 @@ var loadStorage = function(prop) {
  * This method saves values to localStorage
  * It may or may not have a expiration Date
  **/
-var persistStorage = function(prop, value, expires) {
+var persistStorage = function(prop, value) {
   try {
     const currentStorage = Object.assign( {},
         JSON.parse(localStorage.getItem(`${prefix}`)));
 
     currentStorage[documentID][prop] = value;
-    localStorage.setItem( `${prefix}`, JSON.stringify(resultStorage) );
+    localStorage.setItem( `${prefix}`, JSON.stringify(currentStorage) );
 
   } catch (err) {
     console.error('Cannot access local/session storage:', err);
   }
 }
 
-
-
-var decisionTreeLocal = {
-  "document": {
-    "id": "small_dataset",
-    "decisionTree": {
-      "definition": {
-        "questions": [
-          {
-            "propertyName": "text",
-            "propertyLabel": "Text question",
-            "active": true,
-            "type": "text",
-            "text": "Who can do it?",
-            "options": []
-          },
-          {
-            "propertyName": "number",
-            "propertyLabel": "Number question",
-            "active": true,
-            "type": "number",
-            "text": "How many can we do?",
-            "options": []
-          },
-          {
-            "propertyName": "currency",
-            "propertyLabel": "Currency question",
-            "active": true,
-            "type": "currency",
-            "text": "How much do we have to pay?",
-            "options": []
-          },
-          {
-            "propertyName": "date",
-            "propertyLabel": "Date question",
-            "active": true,
-            "type": "date",
-            "text": "When can we do it?",
-            "options": []
-          },
-          {
-            "propertyName": "country",
-            "propertyLabel": "Country question",
-            "active": true,
-            "type": "country",
-            "text": "Where can we do it?",
-            "options": []
-          }
-        ],
-        "actions": [
-          {
-            "type": "information",
-            "title": "Just do it!",
-            "message": "Please"
-          }
-        ]
-      },
-      "root": {
-        "id": "0",
-        "connections": [
-          {
-            "name": "go up",
-            "options": [
-              {
-                "type": "text",
-                "value": "cxvcxvc",
-                "operation": "==",
-                "label": "cvcxv",
-                "rationales": [
-                  {
-                    "text": "23213123",
-                    "title": "Investor Information Requirements",
-                    "sources": [
-                      {
-                        "note": "fsad",
-                        "link": "asdsad"
-                      }
-                    ]
-                  },
-                  {
-                    "text": "fgjhjhlkjlkjkk",
-                    "title": "Product Documentation",
-                    "sources": []
-                  }
-                ],
-                "actions": [
-                  {
-                    "title": "Score",
-                    "message": "Cash",
-                    "scoreMin": 0,
-                    "scoreMax": 10,
-                    "categories": [],
-                    "type": "ScoreAction",
-                    "score": 20
-                  },
-                  {
-                    "type": "information",
-                    "title": "Just do it!",
-                    "message": "Please"
-                  }
-                ]
-              }
-            ],
-            "node": {
-              "id": "6",
-              "connections": [
-                {
-                  "name": "branch 2.1",
-                  "options": [
-                    {
-                      "value": "20",
-                      "type": "number",
-                      "operation": ">",
-                      "rationales": [
-                        {
-                          "text": "ioiuo",
-                          "title": "Investor Information Requirements",
-                          "sources": [
-                            {
-                              "note": "uizui",
-                              "link": "iuzui"
-                            }
-                          ]
-                        },
-                        {
-                          "text": "dfsdfsdf fgdfgfdg",
-                          "title": "Investor Information Requirements",
-                          "sources": []
-                        },
-                        {
-                          "text": "vvcbvcbcv",
-                          "title": "Meeting Type Requirements",
-                          "sources": []
-                        }
-                      ]
-                    },
-                    {
-                      "type": "number",
-                      "value": "250",
-                      "operation": "=="
-                    },
-                    {
-                      "type": "number",
-                      "value": "350",
-                      "operation": ">="
-                    }
-                  ],
-                  "node": {
-                    "id": "7",
-                    "connections": [
-                      {
-                        "name": "branch 3.1",
-                        "options": [
-                          {
-                            "value": "20 EUR",
-                            "type": "currency",
-                            "operation": "==",
-                            "rationales": [
-                              {
-                                "text": "sdasdsad",
-                                "title": "Client Communication Requirements",
-                                "sources": []
-                              }
-                            ]
-                          },
-                          {
-                            "value": "200 EUR",
-                            "type": "currency",
-                            "operation": "=="
-                          }
-                        ],
-                        "node": {
-                          "id": "8",
-                          "connections": [
-                            {
-                              "name": "branch 4.1",
-                              "options": [
-                                {
-                                  "value": "2018-01-01T00:00:00.000Z",
-                                  "type": "date",
-                                  "operation": "=="
-                                },
-                                {
-                                  "value": "2019-01-01T00:00:00.000Z",
-                                  "type": "date",
-                                  "operation": "=="
-                                },
-                                {
-                                  "value": "2020-01-01T17:42:23.000Z",
-                                  "type": "date",
-                                  "operation": "=="
-                                }
-                              ],
-                              "node": {
-                                "id": "9",
-                                "connections": [
-                                  {
-                                    "name": "branch 5.1",
-                                    "options": [],
-                                    "node": {
-                                      "id": "10",
-                                      "actions": [
-                                        {
-                                          "type": "information",
-                                          "title": "Just do it!",
-                                          "message": "Please"
-                                        },
-                                        {
-                                          "title": "Score",
-                                          "message": "ksdjlsak kasd sakdh kha skdh kasdh kasdh ksadhskadh",
-                                          "min": 10,
-                                          "max": 20,
-                                          "categories": [],
-                                          "type": "ScoreAction",
-                                          "score": 12
-                                        },
-                                        {
-                                          "title": "Decision",
-                                          "message": "slkdjsldkhskadhsakd sdjhasd kaskdh skadhs akdsad.",
-                                          "categories": [],
-                                          "type": "DecisionAction",
-                                          "decision": false
-                                        }
-                                      ]
-                                    }
-                                  }
-                                ],
-                                "active": false,
-                                "disableRationale": "sdasdsad"
-                              }
-                            }
-                          ],
-                          "active": false,
-                          "disableRationale": "dsdasd"
-                        }
-                      }
-                    ],
-                    "active": true
-                  }
-                }
-              ],
-              "active": true,
-              "actions": [],
-              "disableRationale": "dfsdfsd"
-            }
-          },
-          {
-            "name": "go down",
-            "options": [
-              {
-                "type": "text",
-                "value": "option4",
-                "operation": "!=",
-                "label": "Option 4"
-              },
-              {
-                "type": "text",
-                "value": "asds",
-                "operation": "==",
-                "label": "dasd"
-              },
-              {
-                "type": "text",
-                "value": "sdfkhskdf",
-                "operation": "==",
-                "label": "dsfksdfh"
-              }
-            ],
-            "node": {
-              "id": "11",
-              "active": true,
-              "connections": [
-                {
-                  "name": "branch 2.1",
-                  "options": [
-                    {
-                      "value": "20",
-                      "type": "number",
-                      "operation": "=="
-                    },
-                    {
-                      "value": "200",
-                      "type": "number",
-                      "operation": "=="
-                    }
-                  ],
-                  "node": {
-                    "id": "12",
-                    "active": true,
-                    "connections": [
-                      {
-                        "name": "branch 3.1",
-                        "options": [
-                          {
-                            "value": "20 EUR",
-                            "type": "currency",
-                            "operation": "=="
-                          },
-                          {
-                            "value": "200 EUR",
-                            "type": "currency",
-                            "operation": "=="
-                          }
-                        ],
-                        "node": {
-                          "id": "13",
-                          "active": true,
-                          "connections": [
-                            {
-                              "name": "branch 4.1",
-                              "options": [
-                                {
-                                  "value": "2018-01-01T00:00:00.000Z",
-                                  "type": "date",
-                                  "operation": "=="
-                                },
-                                {
-                                  "value": "2019-01-01T00:00:00.000Z",
-                                  "type": "date",
-                                  "operation": "=="
-                                },
-                                {
-                                  "value": "2020-01-01T17:42:23.000Z",
-                                  "type": "date",
-                                  "operation": "=="
-                                }
-                              ],
-                              "node": {
-                                "id": "14",
-                                "active": true,
-                                "connections": [
-                                  {
-                                    "name": "branch 5.1",
-                                    "options": [],
-                                    "node": {
-                                      "id": "15",
-                                      "actions": []
-                                    }
-                                  }
-                                ]
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ],
-        "active": true,
-        "disableRationale": "dfdsfsdf"
-      }
-    }
-  }
-};
-
 var initDrawMapView = function() {
 
-  previousNode['id'] = '0';
-  createMapViewLocalStorage();
-
-  resetMapView();
-  drawMapView();
-  /*
-  d3.json("/data/" + this.dataset + ".json", function(error, treeData) {
+  d3.json("/data/" + dataset + ".json", function(error, treeData) {
     if (error) throw error;
-    this.documentID = treeData.document.id;
-    this.decisionTreeLocal = treeData.document.decisionTree;
+    console.log(treeData);
+    documentID = treeData.document.id;
+    decisionTreeLocal = treeData.document.decisionTree;
 
-    // IMPORTANT
-    // get from local storage - selectedNode in this chart & nodes with actions
-    // 
-    // set previous node, depth
-    this.previousNode['id'] = '0'; 
-    this.previousNode['depth'] = '1';
+    console.log(documentID);
+    console.log(decisionTreeLocal);
 
-    this.createMapViewLocalStorage();
+    createMapViewLocalStorage();
 
-    this.resetMapView();
-    this.drawMapView();
+    currentNode = loadStorage('selectedNode');
 
-    // MAYBE???
-    if (this.isMapFullyDrawn) {
-      this.switchSelectedNode(this.previousNode);
-    }
+    resetMapView();
+    drawMapView();
+
   });
-  */
+
 }
 
 initDrawMapView();
