@@ -1248,7 +1248,7 @@ var persistStorage = function(prop, value) {
 
 var initDrawMapView = function() {
 
-  d3.json("/data/" + dataset + ".json", function(error, treeData) {
+  d3.json("./data/" + dataset + ".json", function(error, treeData) {
     if (error) throw error;
     console.log(treeData);
     documentID = treeData.document.id;
