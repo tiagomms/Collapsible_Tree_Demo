@@ -1069,12 +1069,12 @@ var updateQuestionView = function(questions) {
   // question Label
   questionEnter.append('text')
     .attr('class', (d, i) => {
-      return 'questionTitle depth_' + (i) + ' secondary';
+      return 'questionTitle depth_' + (i);
     })
     .attr('text-anchor', 'middle')
     .attr('x', (d, i) => { return (( 2 * i + 1) * fixedWidth / 2); })
     .attr('y', questionSvgHeight / 2 )
-    .attr('dy', '.4em')
+    .attr('dy', '.3em')
     .style('pointer-events', 'none')
     .text((d) => { return d.propertyLabel; })
     .call(wrapText, fixedWidth - 20, true);
@@ -1192,7 +1192,8 @@ var triggerAddRationale = function(d) {
 var createMapViewLocalStorage = function() {
 
   // THE LINE BELOW TO RESET STORAGE
-  // localStorage.removeItem( `${prefix}` );
+  localStorage.setItem( `${prefix}`, JSON.stringify({}));
+  
   if (loadStorage('collapsedNodes')) { return; }
 
   const initialStorage = JSON.parse(localStorage.getItem(`${prefix}`) || {}),

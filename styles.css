@@ -1,14 +1,16 @@
 /* variables */
 /*
-	$background-mapView-color: #2B3446;
+	$background-mapView-color: #DADFE3;
 	$background-mapView-Active-color: #ACB1C0;
-	$branchRect-mapView-Active-color: #454E5D;
+	$branchRect-mapView-Active-color: #D1D6DC;
 	$node-Blue: #48A3DA;
+	$link-Blue: #436EEE;
 	$borders-Blue: #37AFDA;
-	$mainText-mapView-color: #FFFFFF;
-	$secondaryText-mapView-color: #8E93A4;
+	$mainText-mapView-color: #3C4958;
+	$secondaryText-mapView-color: #8b97a5;
 	$rules-map-verticalLine-color: #495163;
-	$background-questionNames-color: #3C4959;
+	$background-questionNames-color: #335f66;
+	$mainText-questionNames-color: #fff;
 	$grey-bg: #F7F8F9;
 	$disable-gray: #B7BBBD;
 */
@@ -34,7 +36,7 @@ body {
 
 .questionMapSvg {
 	position: relative;
-	background-color: #3C4959;
+	background-color: #335f66;
 }
 
 .fixSafariBug {
@@ -46,7 +48,7 @@ body {
 }
 
 .ruleMapSvg {
-	background-color: #2B3446;
+	background-color: #DADFE3;
 	cursor: move;
 	position: absolute;
 	top: 0;
@@ -92,20 +94,20 @@ body {
 }
 
 .node circle {
-	fill: #FFFFFF;
+	fill: #3C4958;
 }
 
 .node rect.branchRect {
-	fill: #2B3446;
+	fill: #DADFE3;
 	stroke: none;
 }
 
 .node rect.branchRect.branchActive {
-	fill: #454E5D;
+	fill: #D1D6DC;
 }
 
 .node.disabled circle {
-	fill: #8E93A4;
+	fill: #8b97a5;
 }
 
 .node.active circle {
@@ -115,31 +117,29 @@ body {
 line {
 	fill: none;
 	stroke-width: 1px;
-	stroke: #fff;
+	stroke: #DADFE3;
 }
 
 line.questionSeparator {
-	stroke: #FFFFFF;
+	stroke: #fff;
 }
 
 line.mapSeparator {
-	stroke: #8E93A4;
+	stroke: #8b97a5;
 }
 
 .link {
 	fill: none;
-	stroke: #48A3DA;
+	stroke: #436EEE;
 	stroke-width: 1.5px;
+	stroke-opacity: 0.6;
 }
 
-text, tspan {
-	font: 10px sans-serif;
-	fill: #FFFFFF;
-}
+text {	font: 12px serif; fill: #3C4958;  }
+tspan {	font: inherit; fill: inherit;  }
+text.secondary, tspan.secondary { fill: #8b97a5; }
+text.questionTitle, tspan.questionTitle { fill: #fff; }
 
-text.secondary, tspan.secondary {
-	fill: #8E93A4;
-}
 
 .zoomRectBtn rect {
 	fill: #F7F8F9;
@@ -147,9 +147,9 @@ text.secondary, tspan.secondary {
 }
 
 .zoomRectBtn:hover rect {
-	fill: #dadfe3;
+	fill: #cbd2d8;
 }
 
 .zoomRectBtn:active rect {
-	fill: #cbd2d8;
+	fill: #c6cace;
 }
