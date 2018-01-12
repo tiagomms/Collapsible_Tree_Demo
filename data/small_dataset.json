@@ -6,44 +6,44 @@
         "questions": [
           {
             "propertyName": "text",
-            "propertyLabel": "Text question",
+            "propertyLabel": "Person in Charge",
             "active": true,
             "type": "text",
             "text": "Who can do it?",
             "options": []
           },
           {
-            "propertyName": "number",
-            "propertyLabel": "Number question",
-            "active": true,
-            "type": "number",
-            "text": "How many can we do?",
-            "options": []
-          },
-          {
             "propertyName": "currency",
-            "propertyLabel": "Currency question",
+            "propertyLabel": "Income",
             "active": true,
             "type": "currency",
             "text": "How much do we have to pay?",
             "options": []
           },
           {
+            "propertyName": "country",
+            "propertyLabel": "Country in Question",
+            "active": true,
+            "type": "country",
+            "text": "Where can we do it?",
+            "options": []
+          },
+          {
             "propertyName": "date",
-            "propertyLabel": "Date question",
+            "propertyLabel": "Contract Sign Date",
             "active": true,
             "type": "date",
             "text": "When can we do it?",
             "options": []
           },
           {
-            "propertyName": "country",
-            "propertyLabel": "Country question",
+            "propertyName": "number",
+            "propertyLabel": "Contract Duration",
             "active": true,
-            "type": "country",
-            "text": "Where can we do it?",
+            "type": "number",
+            "text": "How long is it for?",
             "options": []
-          }
+          }                    
         ],
         "actions": [
           {
@@ -57,7 +57,7 @@
         "id": "0",
         "connections": [
           {
-            "name": "go up",
+            "name": "Paul",
             "options": [
               {
                 "type": "text",
@@ -100,10 +100,10 @@
               }
             ],
             "node": {
-              "id": "6",
+              "id": "1",
               "connections": [
                 {
-                  "name": "branch 2.1",
+                  "name": "Any",
                   "options": [
                     {
                       "value": "20",
@@ -144,10 +144,10 @@
                     }
                   ],
                   "node": {
-                    "id": "7",
+                    "id": "2",
                     "connections": [
                       {
-                        "name": "branch 3.1",
+                        "name": "Outside of the European Union",
                         "options": [
                           {
                             "value": "20 EUR",
@@ -168,10 +168,167 @@
                           }
                         ],
                         "node": {
-                          "id": "8",
+                          "id": "3",
                           "connections": [
                             {
-                              "name": "branch 4.1",
+                              "name": "2018",
+                              "options": [
+                                {
+                                  "value": "2018-01-01T00:00:00.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                },
+                                {
+                                  "value": "2019-01-01T00:00:00.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                },
+                                {
+                                  "value": "2020-01-01T17:42:23.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                }
+                              ],
+                              "node": {
+                                "id": "4",
+                                "connections": [
+                                  {
+                                    "name": "1 Year",
+                                    "options": [],
+                                    "node": {
+                                      "id": "5",
+                                      "actions": [
+                                        {
+                                          "title": "Short Term Contract",
+                                          "type": "InformationAction",
+                                          "message": "Do it!"
+                                        },
+                                        {
+                                          "title": "Interest Rating",
+                                          "message": "ksdjlsak kasd sakdh kha skdh kasdh kasdh ksadhskadh",
+                                          "min": 5,
+                                          "max": 20,
+                                          "categories": [],
+                                          "type": "ScoreAction",
+                                          "score": 20
+                                        },
+                                        {
+                                          "title": "Without Revoke",
+                                          "message": "slkdjsldkhskadhsakd sdjhasd kaskdh skadhs akdsad.",
+                                          "categories": [],
+                                          "type": "ContractAction",
+                                          "decision": false
+                                        },
+                                        {
+                                          "title": "Check bank records for the last 3 years",
+                                          "message": "slkdjsldkhskadhsakd sdjhasd kaskdh skadhs akdsad.",
+                                          "categories": [],
+                                          "type": "ContractAction",
+                                          "decision": false
+                                        }                                        
+                                      ]
+                                    }
+                                  }
+                                ],
+                                "active": false,
+                                "disableRationale": "sdasdsad"
+                              }
+                            }
+                          ],
+                          "active": false,
+                          "disableRationale": "dsdasd"
+                        }
+                      },
+                      {
+                        "name": "In EU",
+                        "options": [
+                          {
+                            "value": "20 EUR",
+                            "type": "currency",
+                            "operation": "==",
+                            "rationales": [
+                              {
+                                "text": "sdasdsad",
+                                "title": "Client Communication Requirements",
+                                "sources": []
+                              }
+                            ]
+                          },
+                          {
+                            "value": "200 EUR",
+                            "type": "currency",
+                            "operation": "=="
+                          }
+                        ],
+                        "node": {
+                          "id": "6",
+                          "connections": [
+                            {
+                              "name": "2017",
+                              "options": [
+                                {
+                                  "value": "2018-01-01T00:00:00.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                },
+                                {
+                                  "value": "2019-01-01T00:00:00.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                },
+                                {
+                                  "value": "2020-01-01T17:42:23.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                }
+                              ],
+                              "node": {
+                                "id": "7",
+                                "connections": [
+                                  {
+                                    "name": "2 Years",
+                                    "options": [],
+                                    "node": {
+                                      "id": "8",
+                                      "actions": [
+                                        {
+                                          "title": "Medium Term Contract",
+                                          "type": "InformationAction",
+                                          "message": "Do it!"
+                                        },
+                                        {
+                                          "title": "Interest Rating",
+                                          "message": "ksdjlsak kasd sakdh kha skdh kasdh kasdh ksadhskadh",
+                                          "min": 5,
+                                          "max": 20,
+                                          "categories": [],
+                                          "type": "ScoreAction",
+                                          "score": 12
+                                        },
+                                        {
+                                          "title": "Without Revoke",
+                                          "message": "slkdjsldkhskadhsakd sdjhasd kaskdh skadhs akdsad.",
+                                          "categories": [],
+                                          "type": "ContractAction",
+                                          "decision": false
+                                        },
+                                        {
+                                          "title": "Check last 5 years bank records",
+                                          "message": "slkdjsldkhskadhsakd sdjhasd kaskdh skadhs akdsad.",
+                                          "categories": [],
+                                          "type": "ContractAction",
+                                          "decision": false
+                                        }
+                                      ]
+                                    }
+                                  }                                
+                                ],
+                                "active": false,
+                                "disableRationale": "sdasdsad"
+                              }
+                            },
+                            {
+                              "name": "2018",
                               "options": [
                                 {
                                   "value": "2018-01-01T00:00:00.000Z",
@@ -193,30 +350,30 @@
                                 "id": "9",
                                 "connections": [
                                   {
-                                    "name": "branch 5.1",
+                                    "name": "More than 2 years",
                                     "options": [],
                                     "node": {
                                       "id": "10",
                                       "actions": [
                                         {
-                                          "type": "information",
-                                          "title": "Just do it!",
-                                          "message": "Please"
+                                          "title": "Long Term Contract",
+                                          "type": "InformationAction",
+                                          "message": "Do it!"
                                         },
                                         {
-                                          "title": "Score",
+                                          "title": "Interest Rating",
                                           "message": "ksdjlsak kasd sakdh kha skdh kasdh kasdh ksadhskadh",
-                                          "min": 10,
+                                          "min": 5,
                                           "max": 20,
                                           "categories": [],
                                           "type": "ScoreAction",
-                                          "score": 12
+                                          "score": 8
                                         },
                                         {
-                                          "title": "Decision",
+                                          "title": "Revoke possible after 2 Years",
                                           "message": "slkdjsldkhskadhsakd sdjhasd kaskdh skadhs akdsad.",
                                           "categories": [],
-                                          "type": "DecisionAction",
+                                          "type": "ContractAction",
                                           "decision": false
                                         }
                                       ]
@@ -226,125 +383,20 @@
                                 "active": false,
                                 "disableRationale": "sdasdsad"
                               }
-                            }
+                            }                            
                           ],
                           "active": false,
                           "disableRationale": "dsdasd"
                         }
-                      }
+                      }                      
                     ],
                     "active": true
                   }
-                }
+                }                
               ],
               "active": true,
               "actions": [],
               "disableRationale": "dfsdfsd"
-            }
-          },
-          {
-            "name": "go down",
-            "options": [
-              {
-                "type": "text",
-                "value": "option4",
-                "operation": "!=",
-                "label": "Option 4"
-              },
-              {
-                "type": "text",
-                "value": "asds",
-                "operation": "==",
-                "label": "dasd"
-              },
-              {
-                "type": "text",
-                "value": "sdfkhskdf",
-                "operation": "==",
-                "label": "dsfksdfh"
-              }
-            ],
-            "node": {
-              "id": "11",
-              "active": true,
-              "connections": [
-                {
-                  "name": "branch 2.1",
-                  "options": [
-                    {
-                      "value": "20",
-                      "type": "number",
-                      "operation": "=="
-                    },
-                    {
-                      "value": "200",
-                      "type": "number",
-                      "operation": "=="
-                    }
-                  ],
-                  "node": {
-                    "id": "12",
-                    "active": true,
-                    "connections": [
-                      {
-                        "name": "branch 3.1",
-                        "options": [
-                          {
-                            "value": "20 EUR",
-                            "type": "currency",
-                            "operation": "=="
-                          },
-                          {
-                            "value": "200 EUR",
-                            "type": "currency",
-                            "operation": "=="
-                          }
-                        ],
-                        "node": {
-                          "id": "13",
-                          "active": true,
-                          "connections": [
-                            {
-                              "name": "branch 4.1",
-                              "options": [
-                                {
-                                  "value": "2018-01-01T00:00:00.000Z",
-                                  "type": "date",
-                                  "operation": "=="
-                                },
-                                {
-                                  "value": "2019-01-01T00:00:00.000Z",
-                                  "type": "date",
-                                  "operation": "=="
-                                },
-                                {
-                                  "value": "2020-01-01T17:42:23.000Z",
-                                  "type": "date",
-                                  "operation": "=="
-                                }
-                              ],
-                              "node": {
-                                "id": "14",
-                                "active": true,
-                                "connections": [
-                                  {
-                                    "name": "branch 5.1",
-                                    "options": [],
-                                    "node": {
-                                      "id": "15",
-                                      "actions": []
-                                    }
-                                  }
-                                ]
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
             }
           }
         ],

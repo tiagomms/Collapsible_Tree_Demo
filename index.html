@@ -1,18 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <div id="mapView">
-      <svg class='questionMapSvg'></svg>
-      <div class='fixSafariBug'>
-        <svg class='ruleMapSvg'></svg>
-      </div>
-      <svg class='ruleMapZoomBtnSvg'></svg>
-    </div>
-    <div id="actions"></div>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="tree_map.js"></script>
-  </body>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">	
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div id="mapView">
+	  <svg class='questionMapSvg'></svg>
+	  <div class='fixSafariBug'>
+	    <svg class='ruleMapSvg'></svg>
+	  </div>
+	  <svg class='ruleMapZoomBtnSvg'></svg>
+	</div>
+	<div id="bottomMenu">
+		<div>
+			<span>Choose Dataset: </span>
+			<form id="selectDataset" style="display:inline">
+			  <input type="radio" name="datasetName" value="small_dataset" checked> Small Dataset
+			  <input type="radio" name="datasetName" value="large_dataset"> Large Dataset
+			</form>
+		</div>
+		<div id="selectedNodeMenu">
+			<p style="font-weight:bold">Selected Node <span id="nodeIdSelected">0</span>, on Question <i><span id="questionSelected"></span></i>: </p>
+			<select id="nodeChildren" style="width: 50vw;">
+				<option></option>
+			</select>
+			<button id="add_action" value="Add" type="button">Add Action</button>
+			<button id="add_rationale" value="Add" type="button">Add Attachment</button>
+			<br/>
+			<span style="color: red; visibility:hidden;" id="nodeIsDisabled">Selected node is disabled</span>
+		</div>
+	</div>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="tree_map.js"></script>
+</body>
 </html>

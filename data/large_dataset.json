@@ -1,0 +1,1718 @@
+{
+  "document": {
+    "id": "large_dataset",
+    "decisionTree": {
+      "definition": {
+        "questions": [
+          {
+            "propertyName": "text",
+            "propertyLabel": "Person in Charge",
+            "active": true,
+            "type": "text",
+            "text": "Who can do it?",
+            "options": []
+          },
+          {
+            "propertyName": "currency",
+            "propertyLabel": "Income",
+            "active": true,
+            "type": "currency",
+            "text": "How much do we have to pay?",
+            "options": []
+          },
+          {
+            "propertyName": "country",
+            "propertyLabel": "Country in Question",
+            "active": true,
+            "type": "country",
+            "text": "Where can we do it?",
+            "options": []
+          },
+          {
+            "propertyName": "date",
+            "propertyLabel": "Contract Sign Date",
+            "active": true,
+            "type": "date",
+            "text": "When can we do it?",
+            "options": []
+          },
+          {
+            "propertyName": "number",
+            "propertyLabel": "Contract Duration",
+            "active": true,
+            "type": "number",
+            "text": "How long is it for?",
+            "options": []
+          },
+          {
+            "propertyName": "text",
+            "propertyLabel": "Lorem ipsum dolor sit amet",
+            "active": true,
+            "type": "text",
+            "text": "Lorem ipsum dolor sit amet?",
+            "options": []
+          },
+          {
+            "propertyName": "text",
+            "propertyLabel": "consectetur adipiscing elit",
+            "active": true,
+            "type": "text",
+            "text": "consectetur adipiscing elit?",
+            "options": []
+          },
+          {
+            "propertyName": "text",
+            "propertyLabel": "sed do eiusmod",
+            "active": true,
+            "type": "text",
+            "text": "sed do eiusmod?",
+            "options": []
+          },
+          {
+            "propertyName": "text",
+            "propertyLabel": "tempor incididunt ut",
+            "active": true,
+            "type": "text",
+            "text": "tempor incididunt ut?",
+            "options": []
+          },
+          {
+            "propertyName": "text",
+            "propertyLabel": "labore et dolore magna aliqua",
+            "active": true,
+            "type": "text",
+            "text": "labore et dolore magna aliqua?",
+            "options": []
+          }                                                  
+        ],
+        "actions": [
+          {
+            "type": "information",
+            "title": "Just do it!",
+            "message": "Please"
+          }
+        ]
+      },
+      "root": {
+        "id": "0",
+        "connections": [
+          {
+            "name": "Mary",
+            "options": [
+              {
+                "type": "text",
+                "value": "cxvcxvc",
+                "operation": "==",
+                "label": "cvcxv",
+                "rationales": [
+                  {
+                    "text": "23213123",
+                    "title": "Investor Information Requirements",
+                    "sources": [
+                      {
+                        "note": "fsad",
+                        "link": "asdsad"
+                      }
+                    ]
+                  },
+                  {
+                    "text": "fgjhjhlkjlkjkk",
+                    "title": "Product Documentation",
+                    "sources": []
+                  }
+                ],
+                "actions": [
+                  {
+                    "title": "Score",
+                    "message": "Cash",
+                    "scoreMin": 0,
+                    "scoreMax": 10,
+                    "categories": [],
+                    "type": "ScoreAction",
+                    "score": 20
+                  },
+                  {
+                    "type": "information",
+                    "title": "Just do it!",
+                    "message": "Please"
+                  }
+                ]
+              }
+            ],
+            "node": {
+              "id": "1",
+              "connections": [
+                {
+                  "name": "Any",
+                  "options": [
+                    {
+                      "value": "20",
+                      "type": "number",
+                      "operation": ">",
+                      "rationales": [
+                        {
+                          "text": "ioiuo",
+                          "title": "Investor Information Requirements",
+                          "sources": [
+                            {
+                              "note": "uizui",
+                              "link": "iuzui"
+                            }
+                          ]
+                        },
+                        {
+                          "text": "dfsdfsdf fgdfgfdg",
+                          "title": "Investor Information Requirements",
+                          "sources": []
+                        },
+                        {
+                          "text": "vvcbvcbcv",
+                          "title": "Meeting Type Requirements",
+                          "sources": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "number",
+                      "value": "250",
+                      "operation": "=="
+                    },
+                    {
+                      "type": "number",
+                      "value": "350",
+                      "operation": ">="
+                    }
+                  ],
+                  "node": {
+                    "id": "2",
+                    "connections": [
+                      {
+                        "name": "Outside of the European Union",
+                        "options": [
+                          {
+                            "value": "20 EUR",
+                            "type": "currency",
+                            "operation": "==",
+                            "rationales": [
+                              {
+                                "text": "sdasdsad",
+                                "title": "Client Communication Requirements",
+                                "sources": []
+                              }
+                            ]
+                          },
+                          {
+                            "value": "200 EUR",
+                            "type": "currency",
+                            "operation": "=="
+                          }
+                        ],
+                        "node": {
+                          "id": "3",
+                          "connections": [
+                            {
+                              "name": "2018",
+                              "options": [
+                                {
+                                  "value": "2018-01-01T00:00:00.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                },
+                                {
+                                  "value": "2019-01-01T00:00:00.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                },
+                                {
+                                  "value": "2020-01-01T17:42:23.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                }
+                              ],
+                              "node": {
+                                "id": "4",
+                                "connections": [
+                                  {
+                                    "name": "1 Year",
+                                    "options": [],
+                                    "node": {
+                                      "id": "5",
+                                      "active": true,
+                                      "connections": [
+                                        {
+                                          "name": "Portugal",
+                                          "options": [
+                                            {
+                                              "value": "20 EUR",
+                                              "type": "currency",
+                                              "operation": "=="
+                                            },
+                                            {
+                                              "value": "200 EUR",
+                                              "type": "currency",
+                                              "operation": "=="
+                                            }
+                                          ],
+                                          "node": {
+                                            "id": "6",
+                                            "active": true,
+                                            "connections": [
+                                              {
+                                                "name": "Any",
+                                                "options": [
+                                                  {
+                                                    "value": "2018-01-01T00:00:00.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  },
+                                                  {
+                                                    "value": "2019-01-01T00:00:00.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  },
+                                                  {
+                                                    "value": "2020-01-01T17:42:23.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  }
+                                                ],
+                                                "node": {
+                                                  "id": "7",
+                                                  "active": true,
+                                                  "connections": [
+                                                    {
+                                                      "name": "Portugal",
+                                                      "options": [
+                                                        {
+                                                          "value": "20 EUR",
+                                                          "type": "currency",
+                                                          "operation": "=="
+                                                        },
+                                                        {
+                                                          "value": "200 EUR",
+                                                          "type": "currency",
+                                                          "operation": "=="
+                                                        }
+                                                      ],
+                                                      "node": {
+                                                        "id": "8",
+                                                        "active": true,
+                                                        "connections": [
+                                                          {
+                                                            "name": "Any",
+                                                            "options": [
+                                                              {
+                                                                "value": "2018-01-01T00:00:00.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              },
+                                                              {
+                                                                "value": "2019-01-01T00:00:00.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              },
+                                                              {
+                                                                "value": "2020-01-01T17:42:23.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              }
+                                                            ],
+                                                            "node": {
+                                                              "id": "9",
+                                                              "active": true,
+                                                              "connections": [
+                                                                {
+                                                                  "name": "3 Years",
+                                                                  "options": [],
+                                                                  "node": {
+                                                                    "id": "10",
+                                                                    "actions": [
+                                                                      {
+                                                                        "title": "Short Term Contract",
+                                                                        "type": "InformationAction",
+                                                                        "message": "Do it!"
+                                                                      },
+                                                                      {
+                                                                        "title": "Interest Rating",
+                                                                        "message": "ksdjlsak kasd sakdh kha skdh kasdh kasdh ksadhskadh",
+                                                                        "min": 5,
+                                                                        "max": 20,
+                                                                        "categories": [],
+                                                                        "type": "ScoreAction",
+                                                                        "score": 7
+                                                                      },
+                                                                      {
+                                                                        "title": "Without Revoke",
+                                                                        "message": "slkdjsldkhskadhsakd sdjhasd kaskdh skadhs akdsad.",
+                                                                        "categories": [],
+                                                                        "type": "ContractAction",
+                                                                        "decision": false
+                                                                      },
+                                                                      {
+                                                                        "title": "Check bank records for the last 3 years",
+                                                                        "message": "slkdjsldkhskadhsakd sdjhasd kaskdh skadhs akdsad.",
+                                                                        "categories": [],
+                                                                        "type": "ContractAction",
+                                                                        "decision": false
+                                                                      }                                        
+                                                                    ]
+                                                                  }
+                                                                }
+                                                              ]
+                                                            }
+                                                          }
+                                                        ]
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ],
+                                "active": false,
+                                "disableRationale": "sdasdsad"
+                              }
+                            }
+                          ],
+                          "active": false,
+                          "disableRationale": "dsdasd"
+                        }
+                      },
+                      {
+                        "name": "In EU",
+                        "options": [
+                          {
+                            "value": "20 EUR",
+                            "type": "currency",
+                            "operation": "==",
+                            "rationales": [
+                              {
+                                "text": "sdasdsad",
+                                "title": "Client Communication Requirements",
+                                "sources": []
+                              }
+                            ]
+                          },
+                          {
+                            "value": "200 EUR",
+                            "type": "currency",
+                            "operation": "=="
+                          }
+                        ],
+                        "node": {
+                          "id": "11",
+                          "connections": [
+                            {
+                              "name": "2017",
+                              "options": [
+                                {
+                                  "value": "2018-01-01T00:00:00.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                },
+                                {
+                                  "value": "2019-01-01T00:00:00.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                },
+                                {
+                                  "value": "2020-01-01T17:42:23.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                }
+                              ],
+                              "node": {
+                                "id": "12",
+                                "connections": [
+                                  {
+                                    "name": "2 Years",
+                                    "options": [],
+                                    "node": {
+                                      "id": "13",
+                                      "active": true,
+                                      "connections": [
+                                        {
+                                          "name": "Portugal",
+                                          "options": [
+                                            {
+                                              "value": "20 EUR",
+                                              "type": "currency",
+                                              "operation": "=="
+                                            },
+                                            {
+                                              "value": "200 EUR",
+                                              "type": "currency",
+                                              "operation": "=="
+                                            }
+                                          ],
+                                          "node": {
+                                            "id": "14",
+                                            "active": true,
+                                            "connections": [
+                                              {
+                                                "name": "Any",
+                                                "options": [
+                                                  {
+                                                    "value": "2018-01-01T00:00:00.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  },
+                                                  {
+                                                    "value": "2019-01-01T00:00:00.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  },
+                                                  {
+                                                    "value": "2020-01-01T17:42:23.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  }
+                                                ],
+                                                "node": {
+                                                  "id": "15",
+                                                  "active": true,
+                                                  "connections": [
+                                                    {
+                                                      "name": "Portugal",
+                                                      "options": [
+                                                        {
+                                                          "value": "20 EUR",
+                                                          "type": "currency",
+                                                          "operation": "=="
+                                                        },
+                                                        {
+                                                          "value": "200 EUR",
+                                                          "type": "currency",
+                                                          "operation": "=="
+                                                        }
+                                                      ],
+                                                      "node": {
+                                                        "id": "16",
+                                                        "active": true,
+                                                        "connections": [
+                                                          {
+                                                            "name": "Any",
+                                                            "options": [
+                                                              {
+                                                                "value": "2018-01-01T00:00:00.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              },
+                                                              {
+                                                                "value": "2019-01-01T00:00:00.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              },
+                                                              {
+                                                                "value": "2020-01-01T17:42:23.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              }
+                                                            ],
+                                                            "node": {
+                                                              "id": "17",
+                                                              "active": true,
+                                                              "connections": [
+                                                                {
+                                                                  "name": "3 Years",
+                                                                  "options": [],
+                                                                  "node": {
+                                                                    "id": "18",
+                                                                    "actions": [
+                                                                      {
+                                                                        "title": "Medium Term Contract",
+                                                                        "type": "InformationAction",
+                                                                        "message": "Do it!"
+                                                                      },
+                                                                      {
+                                                                        "title": "Interest Rating",
+                                                                        "message": "ksdjlsak kasd sakdh kha skdh kasdh kasdh ksadhskadh",
+                                                                        "min": 5,
+                                                                        "max": 20,
+                                                                        "categories": [],
+                                                                        "type": "ScoreAction",
+                                                                        "score": 20
+                                                                      },
+                                                                      {
+                                                                        "title": "Without Revoke",
+                                                                        "message": "slkdjsldkhskadhsakd sdjhasd kaskdh skadhs akdsad.",
+                                                                        "categories": [],
+                                                                        "type": "ContractAction",
+                                                                        "decision": false
+                                                                      },
+                                                                      {
+                                                                        "title": "Check last 5 years bank records",
+                                                                        "message": "slkdjsldkhskadhsakd sdjhasd kaskdh skadhs akdsad.",
+                                                                        "categories": [],
+                                                                        "type": "ContractAction",
+                                                                        "decision": false
+                                                                      }
+                                                                    ]
+                                                                  }
+                                                                }
+                                                              ]
+                                                            }
+                                                          }
+                                                        ]
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }                                
+                                ],
+                                "active": false,
+                                "disableRationale": "sdasdsad"
+                              }
+                            },
+                            {
+                              "name": "2018",
+                              "options": [
+                                {
+                                  "value": "2018-01-01T00:00:00.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                },
+                                {
+                                  "value": "2019-01-01T00:00:00.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                },
+                                {
+                                  "value": "2020-01-01T17:42:23.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                }
+                              ],
+                              "node": {
+                                "id": "19",
+                                "connections": [
+                                  {
+                                    "name": "More than 2 years",
+                                    "options": [],
+                                    "node": {
+                                      "id": "20",
+                                      "active": true,
+                                      "connections": [
+                                        {
+                                          "name": "Portugal",
+                                          "options": [
+                                            {
+                                              "value": "20 EUR",
+                                              "type": "currency",
+                                              "operation": "=="
+                                            },
+                                            {
+                                              "value": "200 EUR",
+                                              "type": "currency",
+                                              "operation": "=="
+                                            }
+                                          ],
+                                          "node": {
+                                            "id": "21",
+                                            "active": true,
+                                            "connections": [
+                                              {
+                                                "name": "Any",
+                                                "options": [
+                                                  {
+                                                    "value": "2018-01-01T00:00:00.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  },
+                                                  {
+                                                    "value": "2019-01-01T00:00:00.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  },
+                                                  {
+                                                    "value": "2020-01-01T17:42:23.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  }
+                                                ],
+                                                "node": {
+                                                  "id": "22",
+                                                  "active": true,
+                                                  "connections": [
+                                                    {
+                                                      "name": "Portugal",
+                                                      "options": [
+                                                        {
+                                                          "value": "20 EUR",
+                                                          "type": "currency",
+                                                          "operation": "=="
+                                                        },
+                                                        {
+                                                          "value": "200 EUR",
+                                                          "type": "currency",
+                                                          "operation": "=="
+                                                        }
+                                                      ],
+                                                      "node": {
+                                                        "id": "23",
+                                                        "active": true,
+                                                        "connections": [
+                                                          {
+                                                            "name": "Any",
+                                                            "options": [
+                                                              {
+                                                                "value": "2018-01-01T00:00:00.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              },
+                                                              {
+                                                                "value": "2019-01-01T00:00:00.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              },
+                                                              {
+                                                                "value": "2020-01-01T17:42:23.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              }
+                                                            ],
+                                                            "node": {
+                                                              "id": "24",
+                                                              "active": true,
+                                                              "connections": [
+                                                                {
+                                                                  "name": "3 Years",
+                                                                  "options": [],
+                                                                  "node": {
+                                                                    "id": "25",
+                                                                    "actions": [
+                                                                      {
+                                                                        "title": "Long Term Contract",
+                                                                        "type": "InformationAction",
+                                                                        "message": "Do it!"
+                                                                      },
+                                                                      {
+                                                                        "title": "Interest Rating",
+                                                                        "message": "ksdjlsak kasd sakdh kha skdh kasdh kasdh ksadhskadh",
+                                                                        "min": 5,
+                                                                        "max": 20,
+                                                                        "categories": [],
+                                                                        "type": "ScoreAction",
+                                                                        "score": 8
+                                                                      },
+                                                                      {
+                                                                        "title": "Revoke possible after 2 Years",
+                                                                        "message": "slkdjsldkhskadhsakd sdjhasd kaskdh skadhs akdsad.",
+                                                                        "categories": [],
+                                                                        "type": "ContractAction",
+                                                                        "decision": false
+                                                                      }
+                                                                    ]
+                                                                  }
+                                                                }
+                                                              ]
+                                                            }
+                                                          }
+                                                        ]
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ],
+                                "active": false,
+                                "disableRationale": "sdasdsad"
+                              }
+                            }                            
+                          ],
+                          "active": false,
+                          "disableRationale": "dsdasd"
+                        }
+                      }                      
+                    ],
+                    "active": true
+                  }
+                }                
+              ],
+              "active": true,
+              "actions": [],
+              "disableRationale": "dfsdfsd"
+            }
+          },
+          {
+            "name": "Simon",
+            "options": [
+              {
+                "type": "text",
+                "value": "option4",
+                "operation": "!=",
+                "label": "Option 4"
+              },
+              {
+                "type": "text",
+                "value": "asds",
+                "operation": "==",
+                "label": "dasd"
+              },
+              {
+                "type": "text",
+                "value": "sdfkhskdf",
+                "operation": "==",
+                "label": "dsfksdfh"
+              }
+            ],
+            "node": {
+              "id": "26",
+              "active": true,
+              "connections": [
+                {
+                  "name": "Above 60k / year",
+                  "options": [
+                    {
+                      "value": "20",
+                      "type": "number",
+                      "operation": ">",
+                      "rationales": [
+                        {
+                          "text": "ioiuo",
+                          "title": "Investor Information Requirements",
+                          "sources": [
+                            {
+                              "note": "uizui",
+                              "link": "iuzui"
+                            }
+                          ]
+                        },
+                        {
+                          "text": "dfsdfsdf fgdfgfdg",
+                          "title": "Investor Information Requirements",
+                          "sources": []
+                        },
+                        {
+                          "text": "vvcbvcbcv",
+                          "title": "Meeting Type Requirements",
+                          "sources": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "number",
+                      "value": "250",
+                      "operation": "=="
+                    },
+                    {
+                      "type": "number",
+                      "value": "350",
+                      "operation": ">="
+                    }
+                  ],
+                  "node": {
+                    "id": "27",
+                    "connections": [
+                      {
+                        "name": "Portugal",
+                        "options": [
+                          {
+                            "value": "20 EUR",
+                            "type": "currency",
+                            "operation": "==",
+                            "rationales": [
+                              {
+                                "text": "sdasdsad",
+                                "title": "Client Communication Requirements",
+                                "sources": []
+                              }
+                            ]
+                          },
+                          {
+                            "value": "200 EUR",
+                            "type": "currency",
+                            "operation": "=="
+                          }
+                        ],
+                        "node": {
+                          "id": "28",
+                          "connections": [
+                            {
+                              "name": "2018",
+                              "options": [
+                                {
+                                  "value": "2018-01-01T00:00:00.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                },
+                                {
+                                  "value": "2019-01-01T00:00:00.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                },
+                                {
+                                  "value": "2020-01-01T17:42:23.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                }
+                              ],
+                              "node": {
+                                "id": "29",
+                                "connections": [
+                                  {
+                                    "name": "1 Year",
+                                    "options": [],
+                                    "node": {
+                                      "id": "30",
+                                      "active": true,
+                                      "connections": [
+                                        {
+                                          "name": "Portugal",
+                                          "options": [
+                                            {
+                                              "value": "20 EUR",
+                                              "type": "currency",
+                                              "operation": "=="
+                                            },
+                                            {
+                                              "value": "200 EUR",
+                                              "type": "currency",
+                                              "operation": "=="
+                                            }
+                                          ],
+                                          "node": {
+                                            "id": "31",
+                                            "active": true,
+                                            "connections": [
+                                              {
+                                                "name": "Any",
+                                                "options": [
+                                                  {
+                                                    "value": "2018-01-01T00:00:00.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  },
+                                                  {
+                                                    "value": "2019-01-01T00:00:00.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  },
+                                                  {
+                                                    "value": "2020-01-01T17:42:23.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  }
+                                                ],
+                                                "node": {
+                                                  "id": "32",
+                                                  "active": true,
+                                                  "connections": [
+                                                    {
+                                                      "name": "Portugal",
+                                                      "options": [
+                                                        {
+                                                          "value": "20 EUR",
+                                                          "type": "currency",
+                                                          "operation": "=="
+                                                        },
+                                                        {
+                                                          "value": "200 EUR",
+                                                          "type": "currency",
+                                                          "operation": "=="
+                                                        }
+                                                      ],
+                                                      "node": {
+                                                        "id": "33",
+                                                        "active": true,
+                                                        "connections": [
+                                                          {
+                                                            "name": "Any",
+                                                            "options": [
+                                                              {
+                                                                "value": "2018-01-01T00:00:00.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              },
+                                                              {
+                                                                "value": "2019-01-01T00:00:00.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              },
+                                                              {
+                                                                "value": "2020-01-01T17:42:23.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              }
+                                                            ],
+                                                            "node": {
+                                                              "id": "34",
+                                                              "active": true,
+                                                              "connections": [
+                                                                {
+                                                                  "name": "3 Years",
+                                                                  "options": [],
+                                                                  "node": {
+                                                                    "id": "35",
+                                                                    "actions": [
+                                                                      {
+                                                                        "title": "Short Term Contract",
+                                                                        "type": "InformationAction",
+                                                                        "message": "Do it!"
+                                                                      },
+                                                                      {
+                                                                        "title": "Interest Rating",
+                                                                        "message": "ksdjlsak kasd sakdh kha skdh kasdh kasdh ksadhskadh",
+                                                                        "min": 5,
+                                                                        "max": 20,
+                                                                        "categories": [],
+                                                                        "type": "ScoreAction",
+                                                                        "score": 15
+                                                                      },
+                                                                      {
+                                                                        "title": "Without Revoke",
+                                                                        "message": "slkdjsldkhskadhsakd sdjhasd kaskdh skadhs akdsad.",
+                                                                        "categories": [],
+                                                                        "type": "ContractAction",
+                                                                        "decision": false
+                                                                      }
+                                                                    ]
+                                                                  }
+                                                                }
+                                                              ]
+                                                            }                                                            
+                                                          }
+                                                        ]
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "name": "2 Years",
+                                    "options": [],
+                                    "node": {
+                                      "id": "36",
+                                      "active": true,
+                                      "connections": [
+                                        {
+                                          "name": "Portugal",
+                                          "options": [
+                                            {
+                                              "value": "20 EUR",
+                                              "type": "currency",
+                                              "operation": "=="
+                                            },
+                                            {
+                                              "value": "200 EUR",
+                                              "type": "currency",
+                                              "operation": "=="
+                                            }
+                                          ],
+                                          "node": {
+                                            "id": "37",
+                                            "active": true,
+                                            "connections": [
+                                              {
+                                                "name": "Any",
+                                                "options": [
+                                                  {
+                                                    "value": "2018-01-01T00:00:00.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  },
+                                                  {
+                                                    "value": "2019-01-01T00:00:00.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  },
+                                                  {
+                                                    "value": "2020-01-01T17:42:23.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  }
+                                                ],
+                                                "node": {
+                                                  "id": "38",
+                                                  "active": true,
+                                                  "connections": [
+                                                    {
+                                                      "name": "Portugal",
+                                                      "options": [
+                                                        {
+                                                          "value": "20 EUR",
+                                                          "type": "currency",
+                                                          "operation": "=="
+                                                        },
+                                                        {
+                                                          "value": "200 EUR",
+                                                          "type": "currency",
+                                                          "operation": "=="
+                                                        }
+                                                      ],
+                                                      "node": {
+                                                        "id": "39",
+                                                        "active": true,
+                                                        "connections": [
+                                                          {
+                                                            "name": "Any",
+                                                            "options": [
+                                                              {
+                                                                "value": "2018-01-01T00:00:00.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              },
+                                                              {
+                                                                "value": "2019-01-01T00:00:00.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              },
+                                                              {
+                                                                "value": "2020-01-01T17:42:23.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              }
+                                                            ],
+                                                            "node": {
+                                                              "id": "40",
+                                                              "active": true,
+                                                              "connections": [
+                                                                {
+                                                                  "name": "3 Years",
+                                                                  "options": [],
+                                                                  "node": {
+                                                                    "id": "41",
+                                                                    "actions": [
+                                                                      {
+                                                                        "title": "Long Term Contract - Without Revoke",
+                                                                        "type": "InformationAction",
+                                                                        "message": "Do it!"
+                                                                      },
+                                                                      {
+                                                                        "title": "Interest Rating",
+                                                                        "message": "ksdjlsak kasd sakdh kha skdh kasdh kasdh ksadhskadh",
+                                                                        "min": 5,
+                                                                        "max": 20,
+                                                                        "categories": [],
+                                                                        "type": "ScoreAction",
+                                                                        "score": 5
+                                                                      }
+                                                                    ]
+                                                                  }
+                                                                }
+                                                              ]
+                                                            }
+                                                          }
+                                                        ]
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "name": "More than 2 Years",
+                                    "options": [],
+                                    "node": {
+                                      "id": "42",
+                                      "active": true,
+                                      "connections": [
+                                        {
+                                          "name": "Portugal",
+                                          "options": [
+                                            {
+                                              "value": "20 EUR",
+                                              "type": "currency",
+                                              "operation": "=="
+                                            },
+                                            {
+                                              "value": "200 EUR",
+                                              "type": "currency",
+                                              "operation": "=="
+                                            }
+                                          ],
+                                          "node": {
+                                            "id": "43",
+                                            "active": true,
+                                            "connections": [
+                                              {
+                                                "name": "Any",
+                                                "options": [
+                                                  {
+                                                    "value": "2018-01-01T00:00:00.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  },
+                                                  {
+                                                    "value": "2019-01-01T00:00:00.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  },
+                                                  {
+                                                    "value": "2020-01-01T17:42:23.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  }
+                                                ],
+                                                "node": {
+                                                  "id": "44",
+                                                  "active": true,
+                                                  "connections": [
+                                                    {
+                                                      "name": "Portugal",
+                                                      "options": [
+                                                        {
+                                                          "value": "20 EUR",
+                                                          "type": "currency",
+                                                          "operation": "=="
+                                                        },
+                                                        {
+                                                          "value": "200 EUR",
+                                                          "type": "currency",
+                                                          "operation": "=="
+                                                        }
+                                                      ],
+                                                      "node": {
+                                                        "id": "45",
+                                                        "active": true,
+                                                        "connections": [
+                                                          {
+                                                            "name": "Any",
+                                                            "options": [
+                                                              {
+                                                                "value": "2018-01-01T00:00:00.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              },
+                                                              {
+                                                                "value": "2019-01-01T00:00:00.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              },
+                                                              {
+                                                                "value": "2020-01-01T17:42:23.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              }
+                                                            ],
+                                                            "node": {
+                                                              "id": "46",
+                                                              "active": true,
+                                                              "connections": [
+                                                                {
+                                                                  "name": "3 Years",
+                                                                  "options": [],
+                                                                  "node": {
+                                                                    "id": "47",
+                                                                    "actions": [
+                                                                      {
+                                                                        "title": "Long Term Contract",
+                                                                        "type": "InformationAction",
+                                                                        "message": "Do it!"
+                                                                      },
+                                                                      {
+                                                                        "title": "Interest Rating",
+                                                                        "message": "ksdjlsak kasd sakdh kha skdh kasdh kasdh ksadhskadh",
+                                                                        "min": 5,
+                                                                        "max": 20,
+                                                                        "categories": [],
+                                                                        "type": "ScoreAction",
+                                                                        "score": 7
+                                                                      },
+                                                                      {
+                                                                        "title": "Revoke possible after 2 Years",
+                                                                        "message": "slkdjsldkhskadhsakd sdjhasd kaskdh skadhs akdsad.",
+                                                                        "categories": [],
+                                                                        "type": "ContractAction",
+                                                                        "decision": false
+                                                                      }
+                                                                    ]
+                                                                  }
+                                                                }
+                                                              ]
+                                                            }
+                                                          }
+                                                        ]
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ],
+                                "active": false,
+                                "disableRationale": "sdasdsad"
+                              }
+                            }
+                          ],
+                          "active": false,
+                          "disableRationale": "dsdasd"
+                        }
+                      }
+                    ],
+                    "active": true
+                  }
+                },
+                {
+                  "name": "Below 60k / year",
+                  "options": [
+                    {
+                      "value": "20",
+                      "type": "number",
+                      "operation": "=="
+                    },
+                    {
+                      "value": "200",
+                      "type": "number",
+                      "operation": "=="
+                    }
+                  ],
+                  "node": {
+                    "id": "48",
+                    "active": true,
+                    "connections": [
+                      {
+                        "name": "Portugal",
+                        "options": [
+                          {
+                            "value": "20 EUR",
+                            "type": "currency",
+                            "operation": "=="
+                          },
+                          {
+                            "value": "200 EUR",
+                            "type": "currency",
+                            "operation": "=="
+                          }
+                        ],
+                        "node": {
+                          "id": "49",
+                          "active": true,
+                          "connections": [
+                            {
+                              "name": "Any",
+                              "options": [
+                                {
+                                  "value": "2018-01-01T00:00:00.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                },
+                                {
+                                  "value": "2019-01-01T00:00:00.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                },
+                                {
+                                  "value": "2020-01-01T17:42:23.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                }
+                              ],
+                              "node": {
+                                "id": "50",
+                                "active": true,
+                                "connections": [
+                                  {
+                                    "name": "3 Years",
+                                    "options": [],
+                                    "node": {
+                                      "id": "51",
+                                      "active": true,
+                                      "connections": [
+                                        {
+                                          "name": "Portugal",
+                                          "options": [
+                                            {
+                                              "value": "20 EUR",
+                                              "type": "currency",
+                                              "operation": "=="
+                                            },
+                                            {
+                                              "value": "200 EUR",
+                                              "type": "currency",
+                                              "operation": "=="
+                                            }
+                                          ],
+                                          "node": {
+                                            "id": "52",
+                                            "active": true,
+                                            "connections": [
+                                              {
+                                                "name": "Any",
+                                                "options": [
+                                                  {
+                                                    "value": "2018-01-01T00:00:00.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  },
+                                                  {
+                                                    "value": "2019-01-01T00:00:00.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  },
+                                                  {
+                                                    "value": "2020-01-01T17:42:23.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  }
+                                                ],
+                                                "node": {
+                                                  "id": "53",
+                                                  "active": true,
+                                                  "connections": [
+                                                    {
+                                                      "name": "Portugal",
+                                                      "options": [
+                                                        {
+                                                          "value": "20 EUR",
+                                                          "type": "currency",
+                                                          "operation": "=="
+                                                        },
+                                                        {
+                                                          "value": "200 EUR",
+                                                          "type": "currency",
+                                                          "operation": "=="
+                                                        }
+                                                      ],
+                                                      "node": {
+                                                        "id": "54",
+                                                        "active": true,
+                                                        "connections": [
+                                                          {
+                                                            "name": "Any",
+                                                            "options": [
+                                                              {
+                                                                "value": "2018-01-01T00:00:00.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              },
+                                                              {
+                                                                "value": "2019-01-01T00:00:00.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              },
+                                                              {
+                                                                "value": "2020-01-01T17:42:23.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              }
+                                                            ],
+                                                            "node": {
+                                                              "id": "55",
+                                                              "active": true,
+                                                              "connections": [
+                                                                {
+                                                                  "name": "3 Years",
+                                                                  "options": [],
+                                                                  "node": {
+                                                                    "id": "56",
+                                                                    "actions": [
+                                                                      {
+                                                                        "title": "Long Term Contract - Without Revoke",
+                                                                        "type": "InformationAction",
+                                                                        "message": "Do it!"
+                                                                      },
+                                                                      {
+                                                                        "title": "Interest Rating",
+                                                                        "message": "ksdjlsak kasd sakdh kha skdh kasdh kasdh ksadhskadh",
+                                                                        "min": 5,
+                                                                        "max": 20,
+                                                                        "categories": [],
+                                                                        "type": "ScoreAction",
+                                                                        "score": 5
+                                                                      }
+                                                                    ]
+                                                                  }
+                                                                }
+                                                              ]
+                                                            }
+                                                          }
+                                                        ]
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "Paul",
+            "options": [
+              {
+                "type": "text",
+                "value": "option4",
+                "operation": "!=",
+                "label": "Option 4"
+              },
+              {
+                "type": "text",
+                "value": "asds",
+                "operation": "==",
+                "label": "dasd"
+              },
+              {
+                "type": "text",
+                "value": "sdfkhskdf",
+                "operation": "==",
+                "label": "dsfksdfh"
+              }
+            ],
+            "node": {
+              "id": "57",
+              "active": true,
+              "connections": [
+                {
+                  "name": "Any",
+                  "options": [
+                    {
+                      "value": "20",
+                      "type": "number",
+                      "operation": "=="
+                    },
+                    {
+                      "value": "200",
+                      "type": "number",
+                      "operation": "=="
+                    }
+                  ],
+                  "node": {
+                    "id": "58",
+                    "active": true,
+                    "connections": [
+                      {
+                        "name": "Portugal",
+                        "options": [
+                          {
+                            "value": "20 EUR",
+                            "type": "currency",
+                            "operation": "=="
+                          },
+                          {
+                            "value": "200 EUR",
+                            "type": "currency",
+                            "operation": "=="
+                          }
+                        ],
+                        "node": {
+                          "id": "59",
+                          "active": true,
+                          "connections": [
+                            {
+                              "name": "Any",
+                              "options": [
+                                {
+                                  "value": "2018-01-01T00:00:00.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                },
+                                {
+                                  "value": "2019-01-01T00:00:00.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                },
+                                {
+                                  "value": "2020-01-01T17:42:23.000Z",
+                                  "type": "date",
+                                  "operation": "=="
+                                }
+                              ],
+                              "node": {
+                                "id": "60",
+                                "active": true,
+                                "connections": [
+                                  {
+                                    "name": "Any",
+                                    "options": [
+                                      {
+                                        "value": "20",
+                                        "type": "number",
+                                        "operation": "=="
+                                      },
+                                      {
+                                        "value": "200",
+                                        "type": "number",
+                                        "operation": "=="
+                                      }
+                                    ],
+                                    "node": {
+                                      "id": "61",
+                                      "active": true,
+                                      "connections": [
+                                        {
+                                          "name": "Portugal",
+                                          "options": [
+                                            {
+                                              "value": "20 EUR",
+                                              "type": "currency",
+                                              "operation": "=="
+                                            },
+                                            {
+                                              "value": "200 EUR",
+                                              "type": "currency",
+                                              "operation": "=="
+                                            }
+                                          ],
+                                          "node": {
+                                            "id": "62",
+                                            "active": true,
+                                            "connections": [
+                                              {
+                                                "name": "Any",
+                                                "options": [
+                                                  {
+                                                    "value": "2018-01-01T00:00:00.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  },
+                                                  {
+                                                    "value": "2019-01-01T00:00:00.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  },
+                                                  {
+                                                    "value": "2020-01-01T17:42:23.000Z",
+                                                    "type": "date",
+                                                    "operation": "=="
+                                                  }
+                                                ],
+                                                "node": {
+                                                  "id": "63",
+                                                  "active": true,
+                                                  "connections": [
+                                                    {
+                                                      "name": "Portugal",
+                                                      "options": [
+                                                        {
+                                                          "value": "20 EUR",
+                                                          "type": "currency",
+                                                          "operation": "=="
+                                                        },
+                                                        {
+                                                          "value": "200 EUR",
+                                                          "type": "currency",
+                                                          "operation": "=="
+                                                        }
+                                                      ],
+                                                      "node": {
+                                                        "id": "64",
+                                                        "active": true,
+                                                        "connections": [
+                                                          {
+                                                            "name": "Any",
+                                                            "options": [
+                                                              {
+                                                                "value": "2018-01-01T00:00:00.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              },
+                                                              {
+                                                                "value": "2019-01-01T00:00:00.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              },
+                                                              {
+                                                                "value": "2020-01-01T17:42:23.000Z",
+                                                                "type": "date",
+                                                                "operation": "=="
+                                                              }
+                                                            ],
+                                                            "node": {
+                                                              "id": "65",
+                                                              "active": true,
+                                                              "connections": [
+                                                                {
+                                                                  "name": "3 Years",
+                                                                  "options": [],
+                                                                  "node": {
+                                                                    "id": "66",
+                                                                    "actions": [
+                                                                      {
+                                                                        "title": "Long Term Contract - Without Revoke",
+                                                                        "type": "InformationAction",
+                                                                        "message": "Do it!"
+                                                                      },
+                                                                      {
+                                                                        "title": "Interest Rating",
+                                                                        "message": "ksdjlsak kasd sakdh kha skdh kasdh kasdh ksadhskadh",
+                                                                        "min": 5,
+                                                                        "max": 20,
+                                                                        "categories": [],
+                                                                        "type": "ScoreAction",
+                                                                        "score": 5
+                                                                      }
+                                                                    ]
+                                                                  }
+                                                                }
+                                                              ]
+                                                            }
+                                                          }
+                                                        ]
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "active": true,
+        "disableRationale": "dfdsfsdf"
+      }
+    }
+  }
+}

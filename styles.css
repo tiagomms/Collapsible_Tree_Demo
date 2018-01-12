@@ -15,10 +15,13 @@
 	$disable-gray: #B7BBBD;
 */
 
-body, div {
+body, div, h1, h2, h3, h4, p {
 	margin: 0;
 	padding: 0;
 }
+
+h4 { margin-bottom: 1em; }
+p { margin: 0.5em 0; }
 body {
 	width: 100%;
 	height: 100vh;
@@ -31,7 +34,12 @@ body {
 	text-align: center;
 	overflow: hidden;
 	width: 100%;
-	height: 100%;
+	height: 80vh;
+	margin-bottom: 2vh; 
+}
+
+#bottomMenu {
+	margin-left: 20px;
 }
 
 .questionMapSvg {
@@ -152,4 +160,8 @@ text.questionTitle, tspan.questionTitle { fill: #fff; }
 
 .zoomRectBtn:active rect {
 	fill: #c6cace;
+}
+
+.isVisible {
+	visibility: visible !important;
 }

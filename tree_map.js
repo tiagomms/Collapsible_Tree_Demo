@@ -5,7 +5,8 @@ var prefix = '$userRuleDocument$';
 var documentID;
 var decisionTreeLocal;
 
-var currentNode = { id: undefined, depth: undefined };
+var currentNode;
+var selectedNode = { id: undefined, depth: undefined };
 
 var treeHeight = 0;
 var treeWidth = 0;
@@ -15,6 +16,7 @@ var contextMenuShowing = false;
 
 var tree;
 var root;
+var questions;
 var nodes;
 var questionSvg;
 var mapviewSvg;
@@ -49,11 +51,6 @@ var getIcon = function(iconName) {
   return icons_pwd + iconName + '.svg';
 };
 
-function TreeMap(datasetName) {
-  dataset = datasetName;
-  initDrawMapView();
-}
-
 /*
  * if map was fully drawn and there is a change on the rule document
  * remove all elements inside the mapView svgs
@@ -77,8 +74,8 @@ var drawMapView = function() {
   // currentStorage represents throughout the document the collapsed nodes
   // for this chart
   const collapseNodesStorage = loadStorage('collapsedNodes');
-  // const parentBranchActionsStorage = loadStorage('parentBranchActions');
-  // const parentBranchRationalesStorage = loadStorage('parentBranchRationales');
+  const parentBranchActionsStorage = loadStorage('parentBranchActionsNodes');
+  const parentBranchRationalesStorage = loadStorage('parentBranchRationalesNodes');
 
 
   // MISSING selected node storage, nodes with actions, attachments
@@ -105,15 +102,23 @@ var drawMapView = function() {
         options.forEach ((option) => {
           if (!__hasParentBranchActions) {
             __hasParentBranchActions = (option['actions'] &&
-              option['actions'].length > 0); 
-              // || parentBranchActionsStorage.indexOf(c.node.id) !== -1
+              option['actions'].length > 0);
           }
           if (!__hasParentBranchRationales) {
             __hasParentBranchRationales = (option['rationales'] &&
-              option['rationales'].length > 0); 
-              // || parentBranchRationalesStorage.indexOf(c.node.id) !== -1
+              option['rationales'].length > 0);
+
           }
         })
+        // if it is in the localStorage - it is the opposite
+        if (parentBranchActionsStorage.indexOf(c.node.id) !== -1) {
+          __hasParentBranchActions = !__hasParentBranchActions;
+        }
+
+        // if it is in the localStorage - it is the opposite
+        if (parentBranchRationalesStorage.indexOf(c.node.id) !== -1) {
+          __hasParentBranchRationales = !__hasParentBranchRationales;
+        }
       }
 
       return Object.assign({}, c.node, {
@@ -130,7 +135,6 @@ var drawMapView = function() {
   root.data.state = (collapseNodesStorage &&
     collapseNodesStorage.indexOf(root.data.id) !== -1 ? 'closed' : 'open');
 
-  console.log(root);
   // zoomListener function
   zoomListener = d3.zoom().scaleExtent(svgScaleExtent)
     .on('end', () => {
@@ -237,7 +241,7 @@ var drawMapView = function() {
   // add separating lines between questions in the mapview
   const separateSectionsArray = [
     0,
-    ...jsonTreeData.definition.questions.map( (d, i) => {
+    ...questions.map( (d, i) => {
       return i + 1;
     })
   ];
@@ -266,7 +270,7 @@ var drawMapView = function() {
     .attr('y', -10 * maxTreeHeight / svgScaleExtent[0] )
     .attr('width', (d, i) => {
       return (i === separateSectionsArray.length - 1 ?
-        fixedWidth * 5 : fixedWidth);
+        fixedWidth * 2 : fixedWidth);
     })
     .attr('height', 20 * maxTreeHeight / svgScaleExtent[0] );
 
@@ -291,7 +295,7 @@ var drawMapView = function() {
 
   // update MapView and QuestionView svgs
   updateMapView(root, false);
-  updateQuestionView(jsonTreeData.definition.questions);
+  updateQuestionView();
 
   // create context Menu
   createContextMenuForQuestions();
@@ -325,7 +329,7 @@ var updateMapView = function(source, hasTransition) {
    * the text, uncomment the line below, and comment the line after.
    * However the tree wont look as nice as before.
   */
-  // tree = tree().nodeSize([fixedHeight, fixedWidth]);
+  // tree.nodeSize([fixedHeight, fixedWidth]);
   tree.size([treeHeight, treeWidth]);
 
   root.x0  = treeHeight / 2;
@@ -333,27 +337,33 @@ var updateMapView = function(source, hasTransition) {
 
   // Assigns the x and y position for the nodes
   const treeData = tree(root);
-
+  
+  // Update the nodes… their id - will be provided by the id tag on the data
+  // & set selectedNode depth and get currentNode
+  // MISSING
   // compute the new tree layout
   // maps the node data to the tree layout
   nodes = treeData.descendants();
   const links = treeData.descendants().slice(1);
 
-  // normalize for fixed-depth & find currentNode depth (if necessary)
-  if (currentNode['depth']) {
-    nodes.forEach((d, i) => { d.y = d.depth * fixedWidth; })
-  } else {
-    nodes.forEach((d, i) => {
-      d.y = d.depth * fixedWidth;
-      if (d.data.id === currentNode['id']) {
-        currentNode['depth'] = d.depth;
-      }
-    })
-  }
+  // normalize for fixed-depth & find selectedNode depth
+  nodes.forEach((d, i) => {
+
+    d.y = d.depth * fixedWidth;
+    d.id = d.data.id;
+    d.data.active = !!d.data.active;
+    d.data.hasParentBranchActions = !!d.data.hasParentBranchActions;
+    d.data.hasParentBranchRationales = !!d.data.hasParentBranchRationales;
+
+    if (d.data.id === selectedNode['id']) {
+      selectedNode['depth'] = d.depth;
+      currentNode = d;
+    }
+  });
 
   // Update the nodes… their id - will be provided by the id tag on the data
   const node = mapviewSvg.selectAll('g.node')
-        .data(nodes, function(d, i) { return d.id = d.data.id; });
+        .data(nodes, function(d) { return d.id; });
 
   // Enter any new nodes
   // A node group may include: circles, branchName, actions, attachments,
@@ -848,7 +858,6 @@ var handleNodeMouseleave = function(d, i) {
 var triggerCollapse = function(d) {
   // getting collapsedNodes from LocalStorage
   const collapsedNodes = loadStorage('collapsedNodes');
-  console.log(collapsedNodes);
 
   // toggle node state
   if (d.data.state === undefined || d.data.state === 'closed') {
@@ -866,8 +875,8 @@ var triggerCollapse = function(d) {
 
   // check if the node selected was collapsed and
   // restores everything back to normal
-  if (currentNode['id']) {
-    switchSelectedNode(currentNode);
+  if (selectedNode['id']) {
+    switchSelectedNode(selectedNode);
   }
 }
 
@@ -954,11 +963,54 @@ var switchSelectedNode = function(d) {
   d3.select('image#actionNode_' + d.id)
     .attr('xlink:href', getIcon('counter-blue'));
 
-  // update Previous Node
-  currentNode['id'] = d.id;
-  currentNode['depth'] = d.depth;
+  // update selected Node
+  selectedNode['id'] = d.id;
+  selectedNode['depth'] = d.depth;
 
-  persistStorage('selectedNode', currentNode);
+  persistStorage('selectedNode', selectedNode);
+
+
+  // setting bottom menu 
+  // - if d is a node (and not the selectedNode id and depth)
+  if (d.data) {
+    currentNode = d;
+
+    // remove former options
+    d3.selectAll('select#nodeChildren option').remove();
+
+    // update Text and Question Selected
+    d3.select('span#nodeIdSelected').text(currentNode.id);
+    d3.select('span#questionSelected').text(questions[currentNode.depth].propertyLabel);
+    
+    // display if node is disabled   
+    d3.select('span#nodeIsDisabled')
+      .classed('isVisible', !currentNode.data.active);
+
+    // add options on select
+    var optionData = (currentNode.children || currentNode._children);
+    var nodeChildrenSelect = d3.select('select#nodeChildren');
+    nodeChildrenSelect.selectAll('option')
+      .data(!optionData ? [] : optionData.map((c) => { 
+        return {
+          'branchId': c.id,
+          'parentActive': c.parent.data.active,
+          'branchName': c.data.parentBranchName,
+          'branchHasActions' : c.data.hasParentBranchActions,
+          'branchHasRationales' : c.data.hasParentBranchRationales
+        };
+      }))
+      .enter()
+      .append('option')
+      .attr('value', (d) => { return d.branchId; })
+      .attr('name', 'selectedNodeChildren')
+      .attr('data-branchhasactions', (d) => { return d.branchHasActions; })
+      .attr('data-branchhasrationales', (d) => { return d.branchHasRationales; })
+      .attr('data-isparentactive', (d) => { return d.parentActive; })
+      .html((d) => { return 'Branch: ' + d.branchName; });
+
+    // trigger first option
+    nodeChildrenSelect.dispatch('change');
+  }
 }
 
 /*
@@ -1048,11 +1100,11 @@ var triggerAttachmentOnNode = function (d) {
  * - places the questions label on top of each node section
  * Can be reused to apply on the bottom of the chart
  */
-var updateQuestionView = function(questions) {
+var updateQuestionView = function() {
 
   // add questions text and separating line - including Action
   const questionEnter = questionSvg.selectAll('g.questionSection')
-    .data([...questions, { 'propertyLabel': 'Action'} ])
+    .data(questions)
     .enter()
     .append('g')
     .style('cursor', 'context-menu')
@@ -1063,7 +1115,9 @@ var updateQuestionView = function(questions) {
     .attr('class', 'questionSeparator')
     .attr('x', (d, i) => { return i * fixedWidth; })
     .attr('y', -10 )
-    .attr('width', fixedWidth)
+    .attr('width', (d, i) => {
+      return (i !== questions.length ? fixedWidth : fixedWidth * 2);
+    })
     .attr('height', 20 + questionSvgHeight / svgScaleExtent[0] );
 
   // question Label
@@ -1192,15 +1246,14 @@ var triggerAddRationale = function(d) {
 var createMapViewLocalStorage = function() {
 
   // THE LINE BELOW TO RESET STORAGE
-  localStorage.setItem( `${prefix}`, JSON.stringify({}));
+  // localStorage.setItem( `${prefix}`, JSON.stringify({}));
   
   if (loadStorage('collapsedNodes')) { return; }
 
   const initialStorage = JSON.parse(localStorage.getItem(`${prefix}`) || {}),
-        props = ['selectedNode', 'collapsedNodes', 'parentBranchActions', 'parentBranchRationales'];
+        props = ['selectedNode', 'collapsedNodes', 'parentBranchActionsNodes', 'parentBranchRationalesNodes'];
   var   currentStorage = Object.assign ( {}, initialStorage);
   
-  console.log(initialStorage);
   currentStorage[documentID] = Object.create({});
 
   props.forEach((prop) => {
@@ -1221,7 +1274,6 @@ var createMapViewLocalStorage = function() {
  **/
 var loadStorage = function(prop) {
   const currentStorage = JSON.parse(localStorage.getItem(`${prefix}`) || {});
-  console.log(currentStorage);
 
   if (!currentStorage || !currentStorage[documentID]) {
     return undefined;
@@ -1246,20 +1298,18 @@ var persistStorage = function(prop, value) {
   }
 }
 
-var initDrawMapView = function() {
+var initDrawMapView = function(dataset) {
 
   d3.json("./data/" + dataset + ".json", function(error, treeData) {
     if (error) throw error;
-    console.log(treeData);
     documentID = treeData.document.id;
     decisionTreeLocal = treeData.document.decisionTree;
-
-    console.log(documentID);
-    console.log(decisionTreeLocal);
+    questions = [...decisionTreeLocal.definition.questions, {'propertyLabel': 'Action'}];
 
     createMapViewLocalStorage();
 
-    currentNode = loadStorage('selectedNode');
+    selectedNode = loadStorage('selectedNode');
+    currentNode = undefined;
 
     resetMapView();
     drawMapView();
@@ -1268,4 +1318,180 @@ var initDrawMapView = function() {
 
 }
 
-initDrawMapView();
+var changeDataset = d3.selectAll("#selectDataset input").on('change', () => {
+    initDrawMapView(d3.select('#selectDataset input:checked').node().value);
+  });
+
+var onChangeOptionBranch = d3.select('select#nodeChildren').on('change', () => {
+
+    const selectNodeChildren = d3.select('select#nodeChildren').node(),
+        _properties = selectNodeChildren.options[selectNodeChildren.selectedIndex],
+        addActionButton = d3.select('button#add_action'),
+        addRationaleButton = d3.select('button#add_rationale'),
+        value = (_properties ? _properties.getAttribute('value') : null)
+        valueIsParentDisabled = (!_properties || _properties.getAttribute('data-isparentactive') === 'false') ? true : null,
+        valueHasNotActions = (!_properties || _properties.getAttribute('data-branchhasactions') === 'false') ? 'Add' : 'Delete',
+        valueHasNotRationales = (!_properties || _properties.getAttribute('data-branchhasrationales') === 'false') ? 'Add' : 'Delete';
+
+    addActionButton.attr('disabled', valueIsParentDisabled)        
+    .attr('value', value)
+    .text(valueHasNotActions + ' Action');
+
+    addRationaleButton.attr('disabled', valueIsParentDisabled)
+    .attr('value', value)
+    .text(valueHasNotRationales + ' Attachment');
+  });
+
+var findNodeIndexById = (_nodeId) => {
+  var index = 0;
+  nodes.some( (d, i) => {
+    if (d.data.id === _nodeId) {
+      index = i;
+      return;
+    }
+  });
+  return index;
+};
+
+var clickAddActionButton = (function() {
+  const addActionButton = d3.select('button#add_action');
+  addActionButton.on('click', () => {
+    const selectNodeChildren = d3.select('select#nodeChildren').node(),
+        _properties = selectNodeChildren.options[selectNodeChildren.selectedIndex],
+        _text = addActionButton.text(),
+        _nodeId = addActionButton.attr('value'),
+        groupID = d3.select('#branchGroup_' + _nodeId)
+        _thisNode = nodes[findNodeIndexById(_nodeId)],
+        actionsStorage = loadStorage('parentBranchActionsNodes'),
+        indexOfNodeInStorage = actionsStorage.indexOf(_nodeId);
+
+    // toggle nodeId in localStorage
+    if (indexOfNodeInStorage !== -1) {
+      actionsStorage.splice(indexOfNodeInStorage, 1);
+      persistStorage('parentBranchActionsNodes', actionsStorage);
+    } else {
+      persistStorage('parentBranchActionsNodes', [ ...actionsStorage, _nodeId]);
+    }
+
+    _thisNode.data.hasParentBranchActions = !_thisNode.data.hasParentBranchActions;
+    if (_thisNode.data.hasParentBranchActions) {
+
+      const bbox = groupID.select('text').node().getBBox(),
+            tspanTotal = groupID.selectAll('tspan').nodes().length,
+            lineHeight = 11.25,
+            boxPadding = { x: 6, y: 4 },
+            xyPadding = {
+              x: -(boxPadding.x + bbox.width / 2),
+              y: -(boxPadding.y + bbox.height / 2) +
+              (lineHeight * (tspanTotal - 1) / 2)
+            };
+
+      // append actions on top of the text
+      groupID.insert('svg:image', 'text')
+        .attr('xlink:href', getIcon('counter'))
+        .attr('x', () => {
+          return _thisNode.data.hasParentBranchRationales ? '-17.5' : '-7';
+        })
+        .attr('y', '-14px')
+        .attr('height', '14px')
+        .attr('width', '14px')
+        .style('opacity', 1)
+        .attr('transform', 'translate(0,' + xyPadding.y + ')')
+        .attr('class', () => {
+          return 'actionIcon branchSourceID_' + _thisNode.parent.id + ' clickable';
+        })
+        .on('click', () => { return triggerActionOnNode(_thisNode.parent); });
+
+      // append attachments on top of the text
+      groupID.select('.attachmentIcon').attr('x', '3.5');
+
+      // console.log('An action was added to Branch ' + _thisNode.data.parentBranchName);
+    } else {
+      groupID.select('.actionIcon').remove();
+      groupID.select('.attachmentIcon').attr('x', '-7');
+      // console.log('An action was removed from Branch ' + _thisNode.data.parentBranchName);
+    }
+
+    addActionButton.text((_text.indexOf('Add') !== -1 ? 'Delete' : 'Add') + ' Action');
+
+    // check if the node selected was collapsed and
+    // restores everything back to normal
+    if (selectedNode['id']) {
+      switchSelectedNode(selectedNode);
+    }
+  });
+})();
+
+var clickAddRationaleButton = (function() {
+  const addRationaleButton = d3.select('button#add_rationale');
+  addRationaleButton.on('click', () => {
+    const selectNodeChildren = d3.select('select#nodeChildren').node(),
+        _properties = selectNodeChildren.options[selectNodeChildren.selectedIndex],
+        _text = addRationaleButton.text(),
+        _nodeId = addRationaleButton.attr('value'),
+        groupID = d3.select('#branchGroup_' + _nodeId)        
+        _thisNode = nodes[findNodeIndexById(_nodeId)],        
+        actionsStorage = loadStorage('parentBranchRationalesNodes'),
+        indexOfNodeInStorage = actionsStorage.indexOf(_nodeId);
+
+    // toggle nodeId in localStorage
+    if (indexOfNodeInStorage !== -1) {
+      actionsStorage.splice(indexOfNodeInStorage, 1);
+      persistStorage('parentBranchRationalesNodes', actionsStorage);
+    } else {
+      persistStorage('parentBranchRationalesNodes', [ ...actionsStorage, _nodeId]);
+    }
+
+    _thisNode.data.hasParentBranchRationales = !_thisNode.data.hasParentBranchRationales;
+    if (_thisNode.data.hasParentBranchRationales) {
+      // console.log('A rationale was added to Branch ' + _thisNode.data.parentBranchName);
+    } else {
+      // console.log('A rationale was removed from Branch ' + _thisNode.data.parentBranchName);
+    }
+    if (_thisNode.data.hasParentBranchRationales) {
+
+      const bbox = groupID.select('text').node().getBBox(),
+            tspanTotal = groupID.selectAll('tspan').nodes().length,
+            lineHeight = 11.25,
+            boxPadding = { x: 6, y: 4 },
+            xyPadding = {
+              x: -(boxPadding.x + bbox.width / 2),
+              y: -(boxPadding.y + bbox.height / 2) +
+              (lineHeight * (tspanTotal - 1) / 2)
+            };
+
+      // append actions on top of the text
+      groupID.insert('svg:image', 'text')
+        .attr('xlink:href', getIcon('attachment'))
+        .attr('x', () => {
+          return _thisNode.data.hasParentBranchActions ? '3.5' : '-7';
+        })
+        .attr('y', '-14px')
+        .attr('height', '14px')
+        .attr('width', '14px')
+        .style('opacity', 1)
+        .attr('transform', 'translate(0,' + xyPadding.y + ')')
+        .attr('class', () => {
+          return 'attachmentIcon branchSourceID_' + _thisNode.parent.id + ' clickable';
+        })
+        .on('click', () => { return triggerActionOnNode(_thisNode.parent); });
+
+      // append attachments on top of the text
+      groupID.select('.actionIcon').attr('x', '-17.5');
+
+    } else {
+      groupID.select('.attachmentIcon').remove();
+      groupID.select('.actionIcon').attr('x', '-7');
+    }
+
+    addRationaleButton.text((_text.indexOf('Add') !== -1 ? 'Delete' : 'Add') + ' Attachment');
+    
+    // check if the node selected was collapsed and
+    // restores everything back to normal
+    if (selectedNode['id']) {
+      switchSelectedNode(selectedNode);
+    }
+  });
+})();
+
+initDrawMapView(d3.select('#selectDataset input:checked').node().value);
