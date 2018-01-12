@@ -1344,7 +1344,7 @@ var onChangeOptionBranch = d3.select('select#nodeChildren').on('change', () => {
 
 var findNodeIndexById = (_nodeId) => {
   var index = 0;
-  nodes.some( (d, i) => {
+  tree(root).descendants().some( (d, i) => {
     if (d.data.id === _nodeId) {
       index = i;
       return;
@@ -1360,8 +1360,8 @@ var clickAddActionButton = (function() {
         _properties = selectNodeChildren.options[selectNodeChildren.selectedIndex],
         _text = addActionButton.text(),
         _nodeId = addActionButton.attr('value'),
-        groupID = d3.select('#branchGroup_' + _nodeId)
-        _thisNode = nodes[findNodeIndexById(_nodeId)],
+        groupID = d3.select('#branchGroup_' + _nodeId),
+        _thisNode = tree(root).descendants()[findNodeIndexById(_nodeId)],
         actionsStorage = loadStorage('parentBranchActionsNodes'),
         indexOfNodeInStorage = actionsStorage.indexOf(_nodeId);
 
@@ -1374,42 +1374,46 @@ var clickAddActionButton = (function() {
     }
 
     _thisNode.data.hasParentBranchActions = !_thisNode.data.hasParentBranchActions;
-    if (_thisNode.data.hasParentBranchActions) {
 
-      const bbox = groupID.select('text').node().getBBox(),
-            tspanTotal = groupID.selectAll('tspan').nodes().length,
-            lineHeight = 11.25,
-            boxPadding = { x: 6, y: 4 },
-            xyPadding = {
-              x: -(boxPadding.x + bbox.width / 2),
-              y: -(boxPadding.y + bbox.height / 2) +
-              (lineHeight * (tspanTotal - 1) / 2)
-            };
+    console.log()
+    if (groupID.select('text').node()) {
+      if (_thisNode.data.hasParentBranchActions) {
 
-      // append actions on top of the text
-      groupID.insert('svg:image', 'text')
-        .attr('xlink:href', getIcon('counter'))
-        .attr('x', () => {
-          return _thisNode.data.hasParentBranchRationales ? '-17.5' : '-7';
-        })
-        .attr('y', '-14px')
-        .attr('height', '14px')
-        .attr('width', '14px')
-        .style('opacity', 1)
-        .attr('transform', 'translate(0,' + xyPadding.y + ')')
-        .attr('class', () => {
-          return 'actionIcon branchSourceID_' + _thisNode.parent.id + ' clickable';
-        })
-        .on('click', () => { return triggerActionOnNode(_thisNode.parent); });
+        const bbox = groupID.select('text').node().getBBox(),
+              tspanTotal = groupID.selectAll('tspan').nodes().length,
+              lineHeight = 11.25,
+              boxPadding = { x: 6, y: 4 },
+              xyPadding = {
+                x: -(boxPadding.x + bbox.width / 2),
+                y: -(boxPadding.y + bbox.height / 2) +
+                (lineHeight * (tspanTotal - 1) / 2)
+              };
 
-      // append attachments on top of the text
-      groupID.select('.attachmentIcon').attr('x', '3.5');
+        // append actions on top of the text
+        groupID.insert('svg:image', 'text')
+          .attr('xlink:href', getIcon('counter'))
+          .attr('x', () => {
+            return _thisNode.data.hasParentBranchRationales ? '-17.5' : '-7';
+          })
+          .attr('y', '-14px')
+          .attr('height', '14px')
+          .attr('width', '14px')
+          .style('opacity', 1)
+          .attr('transform', 'translate(0,' + xyPadding.y + ')')
+          .attr('class', () => {
+            return 'actionIcon branchSourceID_' + _thisNode.parent.id + ' clickable';
+          })
+          .on('click', () => { return triggerActionOnNode(_thisNode.parent); });
 
-      // console.log('An action was added to Branch ' + _thisNode.data.parentBranchName);
-    } else {
-      groupID.select('.actionIcon').remove();
-      groupID.select('.attachmentIcon').attr('x', '-7');
-      // console.log('An action was removed from Branch ' + _thisNode.data.parentBranchName);
+        // append attachments on top of the text
+        groupID.select('.attachmentIcon').attr('x', '3.5');
+
+        // console.log('An action was added to Branch ' + _thisNode.data.parentBranchName);
+      } else {
+        groupID.select('.actionIcon').remove();
+        groupID.select('.attachmentIcon').attr('x', '-7');
+        // console.log('An action was removed from Branch ' + _thisNode.data.parentBranchName);
+      }
     }
 
     addActionButton.text((_text.indexOf('Add') !== -1 ? 'Delete' : 'Add') + ' Action');
@@ -1429,7 +1433,7 @@ var clickAddRationaleButton = (function() {
         _properties = selectNodeChildren.options[selectNodeChildren.selectedIndex],
         _text = addRationaleButton.text(),
         _nodeId = addRationaleButton.attr('value'),
-        groupID = d3.select('#branchGroup_' + _nodeId)        
+        groupID = d3.select('#branchGroup_' + _nodeId),
         _thisNode = nodes[findNodeIndexById(_nodeId)],        
         actionsStorage = loadStorage('parentBranchRationalesNodes'),
         indexOfNodeInStorage = actionsStorage.indexOf(_nodeId);
@@ -1448,40 +1452,42 @@ var clickAddRationaleButton = (function() {
     } else {
       // console.log('A rationale was removed from Branch ' + _thisNode.data.parentBranchName);
     }
-    if (_thisNode.data.hasParentBranchRationales) {
+    if (groupID.select('text').node()) {
+      if (_thisNode.data.hasParentBranchRationales) {
 
-      const bbox = groupID.select('text').node().getBBox(),
-            tspanTotal = groupID.selectAll('tspan').nodes().length,
-            lineHeight = 11.25,
-            boxPadding = { x: 6, y: 4 },
-            xyPadding = {
-              x: -(boxPadding.x + bbox.width / 2),
-              y: -(boxPadding.y + bbox.height / 2) +
-              (lineHeight * (tspanTotal - 1) / 2)
-            };
+        const bbox = groupID.select('text').node().getBBox(),
+              tspanTotal = groupID.selectAll('tspan').nodes().length,
+              lineHeight = 11.25,
+              boxPadding = { x: 6, y: 4 },
+              xyPadding = {
+                x: -(boxPadding.x + bbox.width / 2),
+                y: -(boxPadding.y + bbox.height / 2) +
+                (lineHeight * (tspanTotal - 1) / 2)
+              };
 
-      // append actions on top of the text
-      groupID.insert('svg:image', 'text')
-        .attr('xlink:href', getIcon('attachment'))
-        .attr('x', () => {
-          return _thisNode.data.hasParentBranchActions ? '3.5' : '-7';
-        })
-        .attr('y', '-14px')
-        .attr('height', '14px')
-        .attr('width', '14px')
-        .style('opacity', 1)
-        .attr('transform', 'translate(0,' + xyPadding.y + ')')
-        .attr('class', () => {
-          return 'attachmentIcon branchSourceID_' + _thisNode.parent.id + ' clickable';
-        })
-        .on('click', () => { return triggerActionOnNode(_thisNode.parent); });
+        // append actions on top of the text
+        groupID.insert('svg:image', 'text')
+          .attr('xlink:href', getIcon('attachment'))
+          .attr('x', () => {
+            return _thisNode.data.hasParentBranchActions ? '3.5' : '-7';
+          })
+          .attr('y', '-14px')
+          .attr('height', '14px')
+          .attr('width', '14px')
+          .style('opacity', 1)
+          .attr('transform', 'translate(0,' + xyPadding.y + ')')
+          .attr('class', () => {
+            return 'attachmentIcon branchSourceID_' + _thisNode.parent.id + ' clickable';
+          })
+          .on('click', () => { return triggerActionOnNode(_thisNode.parent); });
 
-      // append attachments on top of the text
-      groupID.select('.actionIcon').attr('x', '-17.5');
+        // append attachments on top of the text
+        groupID.select('.actionIcon').attr('x', '-17.5');
 
-    } else {
-      groupID.select('.attachmentIcon').remove();
-      groupID.select('.actionIcon').attr('x', '-7');
+      } else {
+        groupID.select('.attachmentIcon').remove();
+        groupID.select('.actionIcon').attr('x', '-7');
+      }
     }
 
     addRationaleButton.text((_text.indexOf('Add') !== -1 ? 'Delete' : 'Add') + ' Attachment');
