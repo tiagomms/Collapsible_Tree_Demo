@@ -1,6 +1,3 @@
-
-var dataset = "small_dataset";
-
 var prefix = '$userRuleDocument$';
 var documentID;
 var decisionTreeLocal;
@@ -77,8 +74,6 @@ var drawMapView = function() {
   const parentBranchActionsStorage = loadStorage('parentBranchActionsNodes');
   const parentBranchRationalesStorage = loadStorage('parentBranchRationalesNodes');
 
-
-  // MISSING selected node storage, nodes with actions, attachments
   // setting the d3.hierarchy
   root = d3.hierarchy(jsonTreeData.root, (d) => {
     return (!d.connections ? [] : d.connections.map((c, i) => {
@@ -98,7 +93,6 @@ var drawMapView = function() {
       const options = d.connections[i].options;
       if (options) {
 
-        // MISSING: storage actions - attachments
         options.forEach ((option) => {
           if (!__hasParentBranchActions) {
             __hasParentBranchActions = (option['actions'] &&
@@ -337,16 +331,15 @@ var updateMapView = function(source, hasTransition) {
 
   // Assigns the x and y position for the nodes
   const treeData = tree(root);
-  
-  // Update the nodes… their id - will be provided by the id tag on the data
-  // & set selectedNode depth and get currentNode
-  // MISSING
+
   // compute the new tree layout
   // maps the node data to the tree layout
   nodes = treeData.descendants();
   const links = treeData.descendants().slice(1);
 
-  // normalize for fixed-depth & find selectedNode depth
+  // Update the nodes… their id, if they are active if they have actions and rationales 
+  // between him and the parent branch
+  // set selectedNode depth and get currentNode
   nodes.forEach((d, i) => {
 
     d.y = d.depth * fixedWidth;
@@ -361,7 +354,7 @@ var updateMapView = function(source, hasTransition) {
     }
   });
 
-  // Update the nodes… their id - will be provided by the id tag on the data
+  // create node groups
   const node = mapviewSvg.selectAll('g.node')
         .data(nodes, function(d) { return d.id; });
 
@@ -1068,7 +1061,7 @@ var wrapText = function (texts, width, isQuestionTitle) {
  */
 var routeToNode = function(d) {
   /*
-   * on the actual job, the page would change to perform changes on the node
+   * on the actual job, the page url would change to perform changes on the node
    */
   /*
     const newRoute = '../' + d.data.id + '/' +
@@ -1298,6 +1291,7 @@ var persistStorage = function(prop, value) {
   }
 }
 
+// launch json file - create local storage, reset and draw map view
 var initDrawMapView = function(dataset) {
 
   d3.json("./data/" + dataset + ".json", function(error, treeData) {
@@ -1318,10 +1312,12 @@ var initDrawMapView = function(dataset) {
 
 }
 
+// change Dataset radio button functionalities
 var changeDataset = d3.selectAll("#selectDataset input").on('change', () => {
     initDrawMapView(d3.select('#selectDataset input:checked').node().value);
   });
 
+// changing Branch in select - disable and change text on action and attachment buttons
 var onChangeOptionBranch = d3.select('select#nodeChildren').on('change', () => {
 
     const selectNodeChildren = d3.select('select#nodeChildren').node(),
@@ -1342,6 +1338,7 @@ var onChangeOptionBranch = d3.select('select#nodeChildren').on('change', () => {
     .text(valueHasNotRationales + ' Attachment');
   });
 
+// findNodeIndexById - find node index in tree(root)
 var findNodeIndexById = (_nodeId) => {
   var index = 0;
   tree(root).descendants().some( (d, i) => {
@@ -1353,6 +1350,7 @@ var findNodeIndexById = (_nodeId) => {
   return index;
 };
 
+// Add Action button function
 var clickAddActionButton = (function() {
   const addActionButton = d3.select('button#add_action');
   addActionButton.on('click', () => {
@@ -1375,7 +1373,7 @@ var clickAddActionButton = (function() {
 
     _thisNode.data.hasParentBranchActions = !_thisNode.data.hasParentBranchActions;
 
-    console.log()
+    // BUG: Actions and attachments are not saved once the branch is collapsed
     if (groupID.select('text').node()) {
       if (_thisNode.data.hasParentBranchActions) {
 
@@ -1426,6 +1424,7 @@ var clickAddActionButton = (function() {
   });
 })();
 
+// Add Attachment button function
 var clickAddRationaleButton = (function() {
   const addRationaleButton = d3.select('button#add_rationale');
   addRationaleButton.on('click', () => {
@@ -1452,6 +1451,8 @@ var clickAddRationaleButton = (function() {
     } else {
       // console.log('A rationale was removed from Branch ' + _thisNode.data.parentBranchName);
     }
+
+    // BUG: Actions and attachments are not saved once the branch is collapsed
     if (groupID.select('text').node()) {
       if (_thisNode.data.hasParentBranchRationales) {
 
@@ -1500,4 +1501,5 @@ var clickAddRationaleButton = (function() {
   });
 })();
 
+// launch draw map view
 initDrawMapView(d3.select('#selectDataset input:checked').node().value);
