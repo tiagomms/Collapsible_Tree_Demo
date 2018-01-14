@@ -1,6 +1,6 @@
 # Interactive Data Tree for Startup - Demo
 
-**Demo Link** (in GitHub Pages): https://tiagomms.github.io/Collapsible_Tree_Demo/ 
+**Demo Link** (in GitHub Pages): https://tiagomms.github.io/Interactive_Tree_Demo/ 
 
 Developed in Nov - Dec 2017, I developed an interactive and collapsible tree in D3 for a startup. The data tree worked as an interactive map to add new branches, actions and attachments to each branch. The original work was written in Typescript on top of an AngularJs v4 and Node js API.
 

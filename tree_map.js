@@ -148,8 +148,8 @@ var drawMapView = function() {
   treeWidth = fixedWidth * (root.height + 2);
   containerWidth = (containerWidth || window.screen.width);
   containerHeight = (containerHeight ||
-          0.5 * window.screen.height - 120);
-  translateToRoot[0] = svgMargin.left - 1 + d3.max([
+          0.8 * window.screen.height - 120);
+  translateToRoot[0] = -1 + d3.max([
     (containerWidth - treeWidth + fixedWidth) / 2, 0
   ]);
 
