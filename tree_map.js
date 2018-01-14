@@ -233,12 +233,7 @@ var drawMapView = function() {
 
 
   // add separating lines between questions in the mapview
-  const separateSectionsArray = [
-    0,
-    ...questions.map( (d, i) => {
-      return i + 1;
-    })
-  ];
+  const separateSectionsArray = questions.map( (d, i) => { return i; });
 
   separateSections = mapviewSvg.selectAll('g.mapSection')
     .data(separateSectionsArray)
@@ -252,9 +247,13 @@ var drawMapView = function() {
   separateSections.append('line')
     .attr('class', 'mapSeparator')
     .attr('stroke-opacity', 0.5)
-    .attr('x1', 0)
+    .attr('x1', (d, i) => {
+      return fixedWidth * (i === separateSectionsArray.length - 1 ? 2 : 1);
+    })
     .attr('y1', -10 * maxTreeHeight / svgScaleExtent[0] )
-    .attr('x2', 0)
+    .attr('x2', (d, i) => {
+      return fixedWidth * (i === separateSectionsArray.length - 1 ? 2 : 1);
+    })
     .attr('y2', 10 * maxTreeHeight / svgScaleExtent[0] );
 
   separateSections.append('rect')
@@ -263,11 +262,22 @@ var drawMapView = function() {
     .attr('x', 0)
     .attr('y', -10 * maxTreeHeight / svgScaleExtent[0] )
     .attr('width', (d, i) => {
-      return (i === separateSectionsArray.length - 1 ?
-        fixedWidth * 2 : fixedWidth);
+      return fixedWidth * (i === separateSectionsArray.length - 1 ? 2 : 1);
     })
     .attr('height', 20 * maxTreeHeight / svgScaleExtent[0] );
 
+  // add first line
+  var firstLine = mapviewSvg.append('g')
+    .attr('class', 'mapSection')
+    .attr('transform', 'translate(' + (0 - svgMargin.left) + ', 0)');
+
+  firstLine.append('line')
+    .attr('class', 'mapSeparator')
+    .attr('stroke-opacity', 0.5)
+    .attr('x1', 0)
+    .attr('y1', -10 * maxTreeHeight / svgScaleExtent[0] )
+    .attr('x2', 0)
+    .attr('y2', 10 * maxTreeHeight / svgScaleExtent[0] );
 
   // set tree & root location
   tree = d3.tree();
@@ -748,7 +758,7 @@ var placeTreeInViewportCenter = function() {
           .style('height').split('px')[0], 10) - questionSvgHeight;
 
   translateToRoot = [
-    d3.max([(containerWidth - treeWidth + fixedWidth) / 2, 0]) +
+    d3.max([(containerWidth - treeWidth - fixedWidth) / 2, 0]) +
       svgMargin.left - 1,
     -(root.x0 - containerHeight / 2)
   ];
@@ -1109,7 +1119,7 @@ var updateQuestionView = function() {
     .attr('x', (d, i) => { return i * fixedWidth; })
     .attr('y', -10 )
     .attr('width', (d, i) => {
-      return (i !== questions.length ? fixedWidth : fixedWidth * 2);
+      return fixedWidth * (i === questions.length - 1 ? 2 : 1);
     })
     .attr('height', 20 + questionSvgHeight / svgScaleExtent[0] );
 
@@ -1239,7 +1249,7 @@ var triggerAddRationale = function(d) {
 var createMapViewLocalStorage = function() {
 
   // THE LINE BELOW TO RESET STORAGE
-  // localStorage.setItem( `${prefix}`, JSON.stringify({}));
+  localStorage.setItem( `${prefix}`, JSON.stringify({}));
   
   if (loadStorage('collapsedNodes')) { return; }
 
@@ -1314,8 +1324,8 @@ var initDrawMapView = function(dataset) {
 
 // change Dataset radio button functionalities
 var changeDataset = d3.selectAll("#selectDataset input").on('change', () => {
-    initDrawMapView(d3.select('#selectDataset input:checked').node().value);
-  });
+  initDrawMapView(d3.select('#selectDataset input:checked').node().value);
+});
 
 // changing Branch in select - disable and change text on action and attachment buttons
 var onChangeOptionBranch = d3.select('select#nodeChildren').on('change', () => {
