@@ -149,8 +149,8 @@ var drawMapView = function() {
   containerWidth = (containerWidth || window.screen.width);
   containerHeight = (containerHeight ||
           0.8 * window.screen.height - 120);
-  translateToRoot[0] = -1 + d3.max([
-    (containerWidth - treeWidth + fixedWidth) / 2, 0
+  translateToRoot[0] = svgMargin.left - 1 + d3.max([
+    (containerWidth - (treeWidth + fixedWidth)) / 2, 0
   ]);
 
   // center questions and mapview on the viewport
